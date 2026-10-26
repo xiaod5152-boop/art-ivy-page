@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艺术爬藤 · 高保真原型</title>
+<style>
+:root{
+  --paper:#FFFFFF;
+  --card:#FFFFFF;
+  --ink:#1C1C1C;
+  --ink-2:#6B6B6B;
+  --ink-3:#9A9A9A;
+  --line:#EFEFEF;
+  --line-2:#E6E6E6;
+  --brand:#CE3D6E;
+  --brand-2:#B92F5C;
+  --brand-soft:#FDF1F5;
+  --accent:#CE3D6E;
+  --accent-soft:#FDF1F5;
+  --danger:#D64545;
+  --sans:"PingFang SC","HarmonyOS Sans SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:var(--sans);background:#FFFFFF;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px 12px;
+  color:var(--ink);-webkit-font-smoothing:antialiased;
+}
+.stage{display:flex;flex-direction:column;align-items:center;gap:12px}
+.caption{font-size:11px;color:#8A8A8A;letter-spacing:.05em;text-align:center;line-height:1.7}
+
+/* ============ 设备 ============ */
+.device{
+  position:relative;width:390px;height:min(844px,calc(100vh - 84px));
+  background:var(--paper);border-radius:44px;overflow:hidden;
+  box-shadow:0 0 0 10px #17171A,0 0 0 12px #2A2A2E,0 24px 60px rgba(20,20,18,.35);
+}
+.device::after{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:100px;height:26px;background:#17171A;border-radius:99px;z-index:60}
+.screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+
+/* ============ 微信导航（默认白色） ============ */
+.chrome{position:absolute;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);transition:background .2s}
+.chrome.solid{background:#fff;backdrop-filter:blur(8px)}
+.statusbar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 30px;color:#111}
+.statusbar .t{font-size:14px;font-weight:600;letter-spacing:.01em}
+.statusbar .i{display:flex;align-items:center;gap:5px}
+.navbar{height:44px;display:flex;align-items:center;justify-content:center;position:relative}
+.nav-back{position:absolute;left:8px;top:0;bottom:0;width:36px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.nav-back i{width:9px;height:9px;border-left:1.6px solid #1C1C1C;border-bottom:1.6px solid #1C1C1C;transform:rotate(45deg);margin-left:3px;display:block}
+.nav-title{font-size:17px;font-weight:600;color:#1C1C1C}
+.capsule{
+  position:absolute;right:10px;top:6px;width:88px;height:32px;border-radius:99px;cursor:pointer;
+  border:1px solid rgba(0,0,0,.12);background:rgba(247,247,247,.94);
+  display:flex;align-items:center;justify-content:space-around;
+}
+.capsule:active{background:#ECECEC}
+.capsule .dots{display:flex;gap:4px}
+.capsule .dots i{width:4px;height:4px;border-radius:50%;background:#1A1A1A;display:block}
+.capsule .circle{width:15px;height:15px;border:1.5px solid #1A1A1A;border-radius:50%;position:relative}
+.capsule .circle::after{content:"";position:absolute;top:50%;left:50%;width:4px;height:4px;background:#1A1A1A;border-radius:50%;transform:translate(-50%,-50%)}
+
+/* ============ 通用 ============ */
+.page{padding-top:88px;padding-bottom:96px !important}
+.sec{padding:4px 16px 28px}
+#secOffer{background:#FFF4F7;padding-top:18px}
+#secPath{background:#E7F0FB;padding-top:20px}
+#secLogic{background:#F8F0E3;padding-top:20px}
+#secTl{background:#F1F6EF;padding-top:20px}
+#secCases{background:#FFFFFF;padding-top:20px}
+#secAdv{background:#F6EEF8;padding-top:20px}
+#secTeam{background:#EEF5F4;padding-top:20px}
+#secFaq{background:#FFF6EE;padding-top:20px}
+#secCommunity{background:#FDE8EF;padding-top:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.sec-head{margin-bottom:14px}
+.sec-title{font-size:24px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.sec-sub{font-size:13px;color:var(--ink-2);line-height:1.65}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--brand);font-weight:500;margin-bottom:10px}
+.eyebrow::before{content:"";width:14px;height:1px;background:var(--brand)}
+.muted{color:var(--ink-3);font-size:11.5px}
+
+/* ============ Hero ============ */
+.hero{padding:20px 16px 24px;background:#fff;border-bottom:1px solid var(--line)}
+.hero h1{font-size:27px;line-height:1.34;font-weight:700;letter-spacing:-.02em;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p{font-size:13.5px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
+/* 首屏证据面板：同一份成绩 → 两个结果（营销主视觉） */
+.proof{background:var(--brand-soft);border-radius:14px;padding:12px;margin-bottom:12px}
+.hero .proof{margin:14px 0 0}
+.proof-head{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:12px;font-size:11.5px;color:var(--ink-2)}
+.proof-head b{color:var(--ink);font-weight:600;font-size:13px}
+.proof-cmp{position:relative;display:flex;gap:10px}
+.pc-cell{flex:1;min-width:0;background:#fff;border-radius:10px;padding:10px}
+.pc-cell.hi{border:1.5px solid var(--brand);position:relative}
+.pc-tag{display:inline-block;font-size:10.5px;font-weight:500;border-radius:4px;padding:2px 6px;margin-bottom:8px}
+.pc-cell.plain .pc-tag{color:var(--ink-3);background:#F3F3F3}
+.pc-cell.hi .pc-tag{color:var(--brand);background:rgba(206,61,110,.12)}
+.pc-rank{display:flex;align-items:baseline;gap:4px;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1;white-space:nowrap}
+.pc-rank small{font-size:11px;font-weight:500;color:var(--ink-3)}
+.pc-cell.hi .pc-rank{color:var(--brand)}
+.pc-delta{flex:none;font-size:10px;font-weight:700;color:#fff;background:var(--brand);border-radius:99px;padding:2px 6px}
+.pc-schools{margin-top:4px;font-size:11.5px;line-height:1.5;color:var(--ink-2)}
+.pc-cell.hi .pc-schools{color:var(--brand);font-weight:600}
+.pc-extra{margin-top:6px;padding-top:6px;border-top:1px dashed rgba(206,61,110,.3);font-size:11px;color:var(--brand)}
+.pc-extra-plain{border-top-color:#E8E8E8;color:var(--ink-3)}
+.pc-mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:30px;height:30px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(206,61,110,.35)}
+.proof-foot{margin-top:10px;font-size:10.5px;color:var(--ink-3);line-height:1.5}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:46px;border-radius:8px;font-size:15px;font-weight:600;border:none;font-family:var(--sans);cursor:pointer;transition:transform .15s ease-out,opacity .15s}
+.btn:active{transform:scale(.985)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-plain{margin-top:10px;height:20px;font-size:13px;font-weight:500;color:var(--brand);background:none}
+.trust{display:flex;align-items:center;gap:6px;margin-top:14px;font-size:11.5px;color:var(--ink-3)}
+.trust .trust-dot{width:3px;height:3px;border-radius:50%;background:var(--brand);display:block}
+
+.fit-grid{display:flex;flex-direction:column;gap:10px}
+.fit{border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px 14px;cursor:pointer;position:relative}
+.fit-t{font-size:14px;font-weight:600;line-height:1.4;padding-right:16px}
+.fit-t::after{content:'';position:absolute;right:14px;top:19px;width:6px;height:6px;border-right:1.5px solid var(--brand);border-bottom:1.5px solid var(--brand);transform:rotate(-45deg)}
+.fit-s{font-size:11.5px;color:var(--ink-2);line-height:1.6;margin-top:6px}
+.fit-go{margin-top:9px;font-size:11.5px;color:var(--ink-3)}
+.fit-go b{color:var(--brand);font-weight:600}
+.fit-foot{margin-top:12px;font-size:12px;font-weight:600;color:var(--brand);text-align:center;cursor:pointer}
+.divider{height:8px;background:#F7F7F7}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pain{display:block;border-radius:10px;padding:8px 10px;background:#fff;border:1px solid var(--line);cursor:pointer}
+.pain:active{background:var(--brand-soft)}
+.pain-t{font-size:13px;font-weight:600;color:var(--ink);line-height:1.35}
+.pain-foot{margin-top:12px;padding:12px 14px;border:1px dashed #E6E6E6;border-radius:12px;font-size:12px;color:var(--ink-2);line-height:1.75;cursor:pointer}
+.pain-foot-go{display:block;margin-top:5px;font-size:12px;font-weight:700;color:var(--brand)}
+.pain-foot b{color:var(--ink);font-weight:700}
+.pain-go{display:block;margin-top:4px;font-size:11px;font-weight:600;color:var(--brand)}
+.path-rail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:0 0 12px}
+.rail-card{min-width:0;height:118px;box-sizing:border-box;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 8px 9px;cursor:pointer;font-family:var(--sans);overflow:hidden}
+.rail-card .sit{display:block;height:4.2em;overflow:hidden;font-size:12px;font-weight:600;line-height:1.4;color:var(--ink)}
+.rail-card .pname{display:block;height:2.7em;margin-top:6px;overflow:hidden;font-size:11px;font-weight:700;line-height:1.35;color:var(--brand)}
+.rail-card.on{background:var(--brand-soft);border-color:rgba(206,61,110,.45)}
+.path-else{margin-top:12px;border-top:1px solid var(--line)}
+.path-else button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:11px 0;font-family:var(--sans);cursor:pointer}
+.path-else button:last-child{border-bottom:0}
+.path-else b{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4}
+.path-else em{font-style:normal;flex:none;font-size:12px;font-weight:700;color:var(--brand)}
+.proof-sep{margin:12px 0 11px;border-top:1px solid rgba(206,61,110,.16)}
+.fuse-lead{display:flex;align-items:center;gap:5px;margin:14px 0 10px;font-size:12.5px;font-weight:700;color:var(--ink)}
+.fuse-lead::before{content:'';width:3px;height:12px;background:var(--brand);border-radius:2px}
+
+.brand-card{background:var(--brand-soft);border-radius:14px;padding:16px 14px 14px}
+.brand-kicker{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.04em}
+.brand-lead{margin-top:8px;font-size:18px;font-weight:700;color:var(--ink);line-height:1.45}
+.brand-em{margin-top:4px;font-size:15px;font-weight:700;color:var(--brand);line-height:1.45}
+.brand-card .adv-grid{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;border:0;background:transparent;overflow:visible}
+.brand-card .adv{display:block;padding:12px 10px;border:0;border-radius:12px;background:#fff}
+.brand-card .adv-name{font-size:13.5px;font-weight:700;line-height:1.35}
+.brand-card .adv-desc{margin-top:4px;font-size:11.5px;line-height:1.5}
+.bp{background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;transition:box-shadow .18s}
+.bp:active{box-shadow:0 2px 10px rgba(206,61,110,.08)}
+.bp-t{font-size:13.5px;font-weight:700;color:var(--ink)}
+.bp-s{font-size:11px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+.qual-cmp{margin-top:12px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px}
+.qc-t{font-size:11.5px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.qc-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-3);padding:4px 0}
+.qc-n{flex:1;min-width:0;color:var(--ink-2)}
+.qc-o{flex:none}
+.qc-arrow{flex:none;color:#C9C9C9}
+.qc-s{flex:none;font-weight:700;color:var(--brand)}
+.ring{position:relative;height:320px;margin-top:6px}
+.ring::before{content:"";position:absolute;left:50%;top:50%;width:236px;height:236px;margin:-118px 0 0 -118px;border:1.5px solid #F3D5E0;border-radius:50%}
+.ring::after{content:"";position:absolute;left:50%;top:calc(50% - 118px);margin:-4px 0 0 8px;border:5px solid transparent;border-left:8px solid var(--brand)}
+.ring-core{position:absolute;left:50%;top:50%;z-index:1;width:108px;height:108px;margin:-54px 0 0 -54px;border-radius:50%;background:var(--brand-soft);display:flex;align-items:center;justify-content:center;text-align:center;padding:12px}
+.ring-core b{font-size:15px;font-weight:600;line-height:1.35}
+.ring-node{position:absolute;left:50%;top:50%;z-index:2;width:52px;padding:0;border:0;background:transparent;text-align:center;cursor:pointer;transform:translate(-50%,-50%) rotate(calc(-90deg + var(--i) * 90deg)) translateY(-118px) rotate(calc(90deg - var(--i) * 90deg))}
+.ring-node i{display:grid;place-items:center;width:22px;height:22px;margin:0 auto 3px;border-radius:50%;background:#fff;border:1.5px solid #F3D5E0;font-style:normal;font-size:11px;font-weight:600;color:var(--brand)}
+.ring-node.on i{background:var(--brand);color:#fff;border-color:var(--brand)}
+.ring-node b{display:block;font-size:13px;font-weight:600;line-height:1.3;color:var(--ink)}
+.ring-node.on b{color:var(--brand)}
+.loop-detail{margin-top:4px;padding:2px 14px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.loop-item{padding:11px 0;border-top:1px solid #F3F3F3}
+.loop-item:first-child{border-top:0}
+.loop-item b{display:block;font-size:13px;font-weight:600}
+.loop-item p{margin:3px 0 0;font-size:12px;font-weight:500;line-height:1.5;color:var(--ink-2)}
+.subch{display:flex;align-items:center;gap:8px;margin:14px 16px 10px}
+.subch-no{flex:none;font-size:10.5px;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:5px;padding:3px 7px;letter-spacing:.3px}
+.subch-t{font-size:12.5px;font-weight:600;color:var(--ink-2);line-height:1.45}
+.chapter{display:flex;align-items:center;gap:12px;margin:18px 16px 12px;padding:13px 14px;background:var(--brand-soft);border-radius:12px}
+.ch-no{flex:none;font-size:20px;font-weight:800;color:var(--brand);line-height:1;letter-spacing:-.5px}
+.ch-main{min-width:0}
+.ch-t{font-size:16px;font-weight:700;color:var(--ink);line-height:1.35}
+.ch-s{font-size:11.5px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+
+/* ============ 01 对比 ============ */
+.cmp{display:flex;flex-direction:column;gap:10px}
+.cmp-row{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.cmp-tag{flex:none;width:76px;background:#FAFAFA;padding:14px 0 14px 14px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.cmp-tag b{font-size:13.5px;font-weight:600}
+.cmp-tag span{font-size:10px;color:var(--ink-3);letter-spacing:.06em}
+.cmp-body{flex:1;padding:14px 16px}
+.cmp-body h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.cmp-body p{font-size:12.5px;line-height:1.7;color:var(--ink-2)}
+.cmp-row.hi{border-color:rgba(206,61,110,.28);background:var(--brand-soft)}
+.cmp-row.hi .cmp-tag{background:#fff;border-right:1px solid rgba(206,61,110,.12)}
+.cmp-row.hi .cmp-tag b{color:var(--brand)}
+.cmp-row.hi .cmp-body h4{color:var(--brand)}
+.tail{margin-top:12px;font-size:12.5px;line-height:1.7;color:var(--ink-2);text-align:center}
+.tail b{color:var(--ink)}
+
+/* ============ 01 核心优势 ============ */
+.adv-grid{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.adv{display:flex;gap:10px;align-items:flex-start;border:0;border-radius:0;border-top:1px solid #F3F3F3;background:#fff;padding:13px 14px}
+.adv:first-child{border-top:0}
+.adv-no{flex:none;width:22px;margin-top:2px;font-size:13px;font-weight:700;color:var(--brand);letter-spacing:0}
+.adv-name{font-size:15px;font-weight:700;line-height:1.35}
+.adv-desc{margin-top:3px;font-size:12.5px;font-weight:500;color:var(--ink-2);line-height:1.55}
+
+/* ============ 申请逻辑（三位一体汇聚） ============ */
+.tri2{border:1px solid var(--line);border-radius:12px;background:#fff;padding:18px 16px 16px}
+.tri2-title{font-size:24px;font-weight:700;color:var(--ink);text-align:left;margin-bottom:16px;line-height:1.4}
+.tri2-row{display:flex;gap:10px}
+.tri2-col{flex:1;min-width:0;text-align:center}
+.tri2-dot{width:58px;height:58px;margin:0 auto;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-size:14.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tri2-name{font-size:13.5px;font-weight:700;margin-top:10px}
+.tri2-c{position:relative;height:34px}
+.tc-s{position:absolute;top:0;width:1.5px;height:14px;background:#E0E0E0}
+.tc-s-l{left:calc(16.66% - .75px)}
+.tc-s-m{left:calc(50% - .75px)}
+.tc-s-r{left:calc(83.33% - .75px)}
+.tc-h{position:absolute;top:14px;left:16.66%;right:16.66%;height:1.5px;background:#E0E0E0}
+.tc-down{position:absolute;top:14px;left:calc(50% - .75px);width:1.5px;height:20px;background:#E0E0E0}
+.tc-down::after{content:'';position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:#E0E0E0}
+.tri2-result{background:var(--brand);border-radius:12px;color:#fff;text-align:center;padding:14px 16px;font-size:15px;font-weight:600}
+.tri2-note{margin:10px 6px 0;font-size:12px;font-weight:500;line-height:1.55;color:var(--ink-2);text-align:center}
+
+
+
+/* ============ 02b 6-8 年级艺术探索 ============ */
+.explore{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px}
+.explore-chart{display:block;width:100%;border-radius:8px;background:#fff;border:1px solid #F5F5F5}
+.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.exp{border:1px solid var(--line);border-radius:10px;padding:12px}
+.exp-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.exp-desc{font-size:11px;color:var(--ink-2);line-height:1.6}
+
+.gate-sub{margin:0;padding:14px 12px 10px;border-top:1px solid #F5F5F5}
+.gate-sub-t{font-size:15px;font-weight:700}
+.gate-sub-s{font-size:11.5px;color:var(--ink-2);margin-top:4px;line-height:1.55}
+/* ============ 01b 两种门槛 ============ */
+.gate{padding:0 10px 8px;background:#fff}
+.gate-table{width:100%;border-collapse:collapse}
+.gate-table th,.gate-table td{padding:6px 6px;text-align:left;vertical-align:top;border-bottom:1px solid #F2F2F2;font-weight:500}
+.gate-table thead th{font-size:11px;font-weight:600;color:var(--ink-3);border-bottom:1px solid #E8E8E8}
+.gate-table thead th.hi{color:var(--brand)}
+.gate-table tbody th{font-size:12px;font-weight:600;color:var(--ink);line-height:1.35;white-space:nowrap}
+.gate-table td{font-size:11px;line-height:1.45;color:var(--ink-2)}
+.gate-table td b{font-weight:600;color:var(--ink)}
+.gate-table td.hi{background:var(--brand-soft)}
+.gate-table td.hi b{color:var(--brand)}
+.yale-shot{max-height:168px;overflow:auto;border-top:1px solid #F5F5F5;background:#fff}
+.yale-card .yale-shot img{border-top:0}
+.gate-cap{padding:9px 12px;font-size:10.5px;color:var(--ink-3);background:#FAFAFA;line-height:1.55}
+/* 硬资质行 */
+.qual{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:14px 12px;background:#fff}
+.qual-t{font-size:13px;font-weight:700;margin-bottom:10px}
+.qual-t em{font-style:normal;color:var(--brand)}
+.qual-row{display:flex;align-items:flex-start}
+.qual-i{flex:1;text-align:center;padding:0 4px}
+.qual-i + .qual-i{border-left:1px solid #F2F2F2}
+.qual-i b{display:block;font-size:21px;font-weight:700;color:var(--brand);line-height:1.2;letter-spacing:-.5px}
+.qual-i span{display:block;margin-top:5px;font-size:10.5px;color:var(--ink-2);line-height:1.45}
+.qual-bn{display:block;margin-top:4px;font-style:normal;font-size:10px;font-weight:600;color:var(--brand);line-height:1.35}
+.qc-table{width:100%;border-collapse:collapse;margin-top:4px}
+.qc-table th,.qc-table td{padding:7px 4px;text-align:left;font-size:12px;font-weight:500;border-bottom:1px solid #F3F3F3}
+.qc-table th{font-size:11px;font-weight:600;color:var(--ink-3)}
+.qc-table td.num,.qc-table th.num{text-align:right;width:52px}
+.qc-table td.hi{font-size:14px;font-weight:600;color:var(--brand)}
+.score-list{margin-top:14px;border-top:1px solid #F3F3F3}
+.score-h{padding:12px 0 4px;font-size:12px;font-weight:700}
+.score-r{display:flex;align-items:baseline;gap:8px;padding:8px 0;border-top:1px solid #F6F6F6}
+.score-r b{flex:none;width:46px;font-size:18px;font-weight:700;color:var(--brand);letter-spacing:-.03em}
+.score-r span{font-size:13px;font-weight:600;line-height:1.35}
+.score-r i{font-style:normal;font-size:11px;font-weight:500;color:var(--ink-3)}
+.qual-note{margin-top:11px;padding-top:9px;border-top:1px dashed #EFEFEF;font-size:10.5px;color:var(--ink-3);line-height:1.55}
+.qual-cols{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.qual-col{flex:1;min-width:0;background:#FAFAFA;border-radius:10px;padding:10px 11px}
+.qual-col-t{font-size:11px;font-weight:700;color:var(--brand);margin-bottom:7px}
+.qual-li{font-size:11px;color:var(--ink-2);line-height:1.6;margin-bottom:6px;padding-left:10px;position:relative}
+.qual-li:last-child{margin-bottom:0}
+.qual-li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:2px;background:var(--brand)}
+.qual-li b{color:var(--ink);font-weight:600}
+/* 耶鲁官网原文卡 */
+.evid{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.yale-card{background:#fff}
+.yale-card-h{display:flex;align-items:baseline;gap:8px;padding:10px 12px 8px}
+.yale-card-tag{flex:none;font-size:10px;font-weight:600;color:var(--brand);background:var(--brand-soft);border-radius:4px;padding:2px 7px}
+.yale-card-t{font-size:12.5px;font-weight:700}
+.yale-card img{display:block;width:100%;border-top:1px solid #F5F5F5}
+.yale-card-f{padding:8px 12px;font-size:10.5px;color:var(--ink-3);background:#FAFAFA;border-top:1px solid #F5F5F5;line-height:1.55}
+/* 学生作品实拍 */
+.works{margin-top:12px}
+.works-t{font-size:11px;font-weight:600;color:var(--ink-2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.works-t::before{content:"";width:3px;height:11px;background:var(--brand);border-radius:2px}
+.works-row{display:flex;gap:8px}
+.works-row img{border-radius:8px;border:1px solid #F0F0F0;display:block}
+.works-main{flex:1;min-width:0}
+.works-side{flex:none;width:88px}
+.works-cap{font-size:10px;color:var(--ink-3);margin-top:6px;line-height:1.5}
+
+.seg{display:flex;background:#F5F5F5;border-radius:9px;padding:3px;margin-bottom:14px}
+.seg-item{flex:1;height:36px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 4px;border-radius:7px;cursor:pointer;font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;transition:background .2s,color .2s,box-shadow .2s}
+.seg-item small{display:block;font-size:10px;color:var(--ink-3);margin-top:1px}
+.seg-item.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 4px rgba(23,23,21,.1)}
+.seg-item.on small{color:var(--brand)}
+.case-seg{margin-top:12px}
+.case-seg .seg-item{height:36px;font-size:12px;padding:0 2px}
+.path{padding:12px 12px 10px}
+.path h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.path .lead{font-size:13px;color:var(--ink-2);line-height:1.55;margin-bottom:10px}
+.path .lead em{font-style:normal;color:var(--brand);font-weight:600}
+.meta{background:#FAFAFA;border-radius:8px;padding:8px 12px;margin-bottom:10px}
+.meta-row{display:flex;gap:10px;font-size:12.5px;line-height:1.5}
+.meta-row + .meta-row{margin-top:4px}
+.meta-row dt{flex:none;width:64px;color:var(--ink-3)}
+.meta-row dd{flex:1;color:var(--ink)}
+.meta-row dd em{font-style:normal;color:var(--brand);font-weight:600}
+.bullets{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.bullet{display:flex;gap:8px;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+.bullet i{flex:none;width:15px;height:15px;margin-top:2px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-size:9px;font-style:normal;font-weight:700;display:flex;align-items:center;justify-content:center}
+.bullet b{color:var(--brand);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--sans);font-size:11px;color:var(--ink);background:#FAFAFA;border:1px solid var(--line);border-radius:6px;padding:3px 8px;cursor:pointer;transition:background .16s}
+.case.hit{box-shadow:0 0 0 2px var(--brand)}
+.tag:active{background:#F0F0F0}
+.tag u{text-decoration:none;color:var(--ink-3);font-size:10.5px;margin-left:4px}
+.reps{margin-top:12px}
+.rep{display:block;width:100%;margin-top:8px;text-align:left;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;font-family:var(--sans);cursor:pointer}
+.rep-k{display:block;font-size:11px;font-weight:700;color:var(--brand)}
+.rep b{display:block;margin-top:4px;font-size:14px;font-weight:700;line-height:1.4;color:var(--ink)}
+.rep-s{display:block;margin-top:3px;font-size:12px;font-weight:500;color:var(--ink-2);line-height:1.45}
+
+/* ============ 时间轴 ============ */
+.tl{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px}
+.tl-head{display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid #F5F5F5;margin-bottom:4px}
+.tl-stage{font-size:15px;font-weight:600}
+.tl-tip{font-size:10.5px;color:var(--brand);background:var(--brand-soft);border-radius:99px;padding:2px 8px}
+.tl-row{position:relative;display:flex;gap:10px;padding:0 0 14px}
+.tl-row:last-child{padding-bottom:2px}
+.tl-row::before{content:"";position:absolute;left:4px;top:10px;bottom:0;width:1.5px;background:#F3D5E0}
+.tl-row:last-child::before{display:none}
+.tl-dot{flex:none;width:9px;height:9px;margin-top:5px;border-radius:50%;background:#fff;border:2px solid var(--brand);box-sizing:border-box;position:relative;z-index:1}
+.tl-body{flex:1;min-width:0}
+.tl-item + .tl-item{margin-top:10px}
+.tl-item .tl-time{display:inline;margin:0 8px 0 0;font-size:11px;font-weight:600;color:var(--brand);line-height:1}
+.tl-item b{font-size:14px;font-weight:600}
+.tl-item > span:last-child{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--ink-2);line-height:1.5}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.cmp-col{border-radius:12px;padding:10px 8px 8px;background:#F6F6F6}
+.cmp-col.live{background:var(--brand-soft)}
+.cmp-h{font-size:12px;font-weight:700;line-height:1.35;margin-bottom:6px;color:var(--ink-2)}
+.cmp-col.live .cmp-h{color:var(--brand)}
+.cmp-step{background:#fff;border-radius:8px;padding:7px 8px;margin-top:6px;font-size:11px;font-weight:600;line-height:1.4;color:var(--ink-2)}
+.cmp-col.live .cmp-step{color:var(--ink);padding-right:18px;position:relative}
+.cmp-col.live .cmp-step::after{content:'✓';position:absolute;right:6px;top:7px;font-size:10px;color:var(--brand)}
+.cmp-step em{display:block;font-style:normal;font-size:10px;font-weight:700;color:var(--ink-3);margin-bottom:2px}
+.cmp-col.live .cmp-step em{color:var(--brand)}
+.stair{display:flex;flex-direction:column;gap:8px}
+.stair-item{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.stair-step{display:flex;align-items:flex-start;gap:8px;width:100%;text-align:left;border:0;background:transparent;padding:11px 10px;font-family:var(--sans);cursor:pointer}
+.stair-no{flex:none;min-width:36px;text-align:center;font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:4px 4px;line-height:1.2}
+.stair-main{flex:1;min-width:0}
+.stair-main b{display:block;font-size:14px;font-weight:700;line-height:1.3}
+.stair-main span{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--ink-2);line-height:1.45}
+.stair-item.on{border-color:rgba(206,61,110,.4)}
+.stair-item.on .stair-step{background:var(--brand-soft)}
+.stair-body{display:none;padding:4px 10px 12px;background:#fff}
+.stair-item.on .stair-body{display:block}
+.task{display:flex;align-items:flex-start;gap:8px;background:#FAFAFA;border-radius:8px;padding:8px 10px;margin-top:8px}
+.task b{font-size:13px;font-weight:700;line-height:1.35}
+.task em{font-style:normal;font-size:11px;font-weight:700;color:var(--brand);margin-right:6px}
+.task span{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--ink-2);line-height:1.45}
+.task i{flex:none;width:16px;height:16px;margin-top:1px;border-radius:50%;background:var(--brand);color:#fff;font-style:normal;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.stair-goal{margin-top:10px;background:var(--brand);color:#fff;border-radius:12px;text-align:center;padding:14px 48px;font-size:14px;font-weight:700;line-height:1.5}
+.dim-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;align-items:stretch}
+.dim{min-width:0;height:108px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.dim-step{display:block;width:100%;height:108px;box-sizing:border-box;text-align:left;border:0;background:#fff;padding:10px 8px;font-family:var(--sans);cursor:pointer;overflow:hidden}
+.dim.on{border-color:rgba(206,61,110,.45)}
+.dim.on .dim-step{background:var(--brand-soft)}
+.dim-k{display:block;height:1.3em;overflow:hidden;white-space:nowrap;font-size:10px;font-weight:700;color:var(--brand);line-height:1.3}
+.dim-step b{display:block;height:2.6em;margin-top:3px;overflow:hidden;font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.dim-step span{display:block;height:2.7em;margin-top:3px;overflow:hidden;font-size:11px;font-weight:500;color:var(--ink-2);line-height:1.35}
+.dim-panel{margin-top:10px}
+.flowline{position:relative;margin-left:6px;padding-left:22px}
+.flowline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#F3D5E0}
+.fnode{position:relative;padding-bottom:16px}
+.fnode:last-child{padding-bottom:0}
+.fnode::before{content:'';position:absolute;left:-22px;top:3px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--brand);box-sizing:border-box}
+.fnode:last-child::before{background:var(--brand)}
+.fnode-h{font-size:14px;font-weight:700;line-height:1.3}
+.fnode-h span{margin-left:6px;font-size:12px;font-weight:700;color:var(--brand)}
+.fstep{display:flex;align-items:baseline;gap:8px;margin-top:6px;font-size:13px;font-weight:600;line-height:1.35}
+.fstep em{flex:none;width:52px;font-style:normal;font-size:11px;font-weight:700;color:var(--ink-3)}
+.gpair{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.gcol-h{position:relative;padding:8px 12px 8px 8px;font-size:13px;font-weight:700;line-height:1.25;color:var(--brand);background:var(--brand-soft);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,0 100%)}
+.gcol + .gcol .gcol-h{color:#fff;background:var(--brand);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,0 100%,8px 50%)}
+.gcol-h span{display:block;margin-top:2px;font-size:10px;font-weight:600;line-height:1.35;opacity:.9}
+.gpair .task{padding:7px 8px}
+.gpair .task b{font-size:12px}
+.gpair .task span{font-size:11px}
+.plan-g + .plan-g{margin-top:12px}
+.plan-g-h{font-size:13px;font-weight:700;color:var(--ink);line-height:1.4}
+.plan-g-h span{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--ink-2)}
+.lift{display:flex;flex-direction:column;gap:8px}
+.lift-card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px 12px 14px}
+.lift-k{font-size:11px;font-weight:700;color:var(--brand)}
+.lift-t{margin-top:2px;font-size:16px;font-weight:700;line-height:1.35}
+.lift-nums{display:flex;margin-top:10px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.lift-nums div{flex:1;text-align:center;padding:10px 6px}
+.lift-nums div + div{border-left:1px solid var(--line)}
+.lift-nums b{display:block;font-size:22px;font-weight:700;color:var(--brand);letter-spacing:-.03em}
+.lift-nums span{display:block;margin-top:3px;font-size:11px;font-weight:600;color:var(--ink-2);line-height:1.35}
+.lift-li{margin-top:10px;font-size:12.5px;font-weight:500;line-height:1.55;color:var(--ink-2)}
+.lift-li b{color:var(--ink);font-weight:700}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.duo-i{background:var(--brand-soft);border-radius:12px;padding:14px 10px;text-align:center}
+.duo-i b{display:block;font-size:16px;font-weight:700;color:var(--brand)}
+.duo-i span{display:block;margin-top:3px;font-size:12px;font-weight:600;color:var(--ink);line-height:1.4}
+.route{margin-top:8px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px}
+.route-h b{display:block;font-size:15px;font-weight:700}
+.route-h span{display:block;margin-top:2px;font-size:12px;font-weight:700;color:var(--brand);line-height:1.4}
+.perk{margin-top:8px}
+.perk b{display:block;font-size:13px;font-weight:700;color:var(--ink);line-height:1.35}
+.perk span{display:block;margin-top:1px;font-size:12px;font-weight:500;color:var(--ink-2);line-height:1.4}
+.wt{display:grid;grid-template-columns:36px 1fr 1fr;margin-top:8px;border:1px solid var(--line);border-radius:8px;overflow:hidden;text-align:center;font-size:12px;font-weight:700}
+.wt div{padding:6px 4px;border-top:1px solid #F3F3F3;color:var(--ink)}
+.wt div:nth-child(-n+3){border-top:0;background:#FAFAFA;font-size:11px;font-weight:600;color:var(--ink-3)}
+.wt div:nth-child(3n){color:var(--brand)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips span{font-size:12px;font-weight:600;color:var(--ink);background:#FAFAFA;border:1px solid var(--line);border-radius:99px;padding:4px 8px}
+.ic-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.ic-pair div{border-radius:12px;padding:12px}
+.ic-pair b{display:block;font-size:14px;font-weight:700}
+.ic-pair span{display:block;margin-top:4px;font-size:12px;font-weight:500;line-height:1.45}
+.ic-pair .ic-a{background:#F8D5E3;color:#7A2344}
+.ic-pair .ic-w{background:#D9E4F7;color:#243E6B}
+.courses{display:flex;flex-direction:column;gap:10px}
+.crow{border-radius:14px;overflow:hidden}
+.crow-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:11px 14px}
+.crow-h b{font-size:16px;font-weight:700}
+.crow-h span{flex:none;font-size:12px;font-weight:700}
+.crow-b{padding:10px 14px 12px;background:#fff}
+.crow .chips span{background:#fff}
+.crow.ap{background:#FDE8EF}
+.crow.ap .crow-h{color:#7A2344}
+.crow.al{background:#E5F2E4}
+.crow.al .crow-h{color:#1E5C32}
+.crow.ib{background:#F8EBD4}
+.crow.ib .crow-h{color:#6A4A16}
+.crow .ln{display:flex;gap:8px;margin-top:8px;font-size:12.5px;font-weight:500;line-height:1.45;color:var(--ink-2)}
+.crow .ln:first-child{margin-top:0}
+.crow .ln b{flex:none;width:36px;font-size:12px;font-weight:700;color:var(--ink)}
+.route-row{display:flex;gap:8px;margin-top:8px;font-size:12.5px;font-weight:500;line-height:1.45;color:var(--ink-2)}
+.route-row em{flex:none;width:40px;font-style:normal;font-weight:700;color:var(--brand)}
+.gpair.yrs .gcol-h,.gpair.yrs .gcol + .gcol .gcol-h{color:var(--brand);background:var(--brand-soft);clip-path:none;border-radius:8px;padding:8px}
+
+/* ============ 03 导师流程图 ============ */
+.flow{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 14px}
+.node-lead{display:flex;align-items:center;gap:12px;background:var(--brand);border-radius:10px;padding:12px 14px;color:#fff}
+.node-lead img{width:52px;height:52px;border-radius:50%;object-fit:cover;background:#fff;flex:none;border:2px solid rgba(255,255,255,.5)}
+.node-lead .n-name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
+.node-lead .n-name span{font-size:10px;font-weight:500;background:rgba(255,255,255,.18);border-radius:99px;padding:2px 7px}
+.node-lead .n-desc{font-size:11.5px;line-height:1.6;color:rgba(255,255,255,.82);margin-top:3px}
+.conn{display:block;width:100%;height:34px}
+.branch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.branch-col{border:1px solid var(--line);border-radius:10px;padding:12px 8px;background:#FAFAFA}
+.branch-title{font-size:11.5px;font-weight:600;color:var(--brand);letter-spacing:.08em;text-align:center;padding-bottom:10px;border-bottom:1px dashed var(--line-2);margin-bottom:10px}
+.mentor{display:flex;align-items:flex-start;gap:9px;cursor:pointer}
+.mentor + .mentor{margin-top:12px}
+.mentor:active{opacity:.6}
+.mentor img{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;background:var(--brand-soft)}
+.mentor .m-name{font-size:12px;font-weight:600;line-height:1.35;white-space:nowrap;letter-spacing:-.02em}
+.mentor .m-duty{font-size:11px;color:var(--ink-2);line-height:1.55;margin-top:2px}
+.node-base{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:var(--accent-soft);border-color:rgba(206,61,110,.24)}
+.node-base img{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;background:#fff}
+.node-base .n-name{font-size:13px;font-weight:600}
+.node-base .n-desc{font-size:11px;color:var(--ink-2);line-height:1.55;margin-top:2px}
+.node-base .n-badge{margin-left:auto;flex:none;font-size:10px;color:var(--accent);border:1px solid rgba(206,61,110,.35);border-radius:99px;padding:2px 7px}
+
+/* ============ 05b 代表性案例 ============ */
+.case-group{font-size:15px;font-weight:600;color:var(--brand);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.case-group::before{content:'';width:16px;height:3px;background:var(--brand);border-radius:2px}
+.case-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.case-grid:last-child{margin-bottom:0}
+.case{border:1px solid #EFE6EA;border-radius:16px;background:#fff;padding:16px 14px 14px}
+#secCases .case[hidden]{display:none !important}
+.case-top{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px}
+.case-school{font-size:17px;font-weight:700;color:var(--brand);line-height:1.3}
+.case-major{font-size:13px;color:var(--ink-3)}
+.case-meta{margin-top:10px}
+.case-meta-i{display:flex;font-size:13px;color:#5C5C5C;line-height:1.7}
+.case-meta-i span{flex:none;width:42px;color:#B0B0B0}
+.case-hl{color:var(--brand);font-weight:600}
+.case-shot{display:block;width:100%;height:168px;object-fit:cover;object-position:center 40%;border-radius:12px;margin-bottom:12px}
+.case-quote{margin-top:0;font-size:14px;font-weight:600;color:var(--brand);background:#FDE8EF;border-radius:10px;padding:12px 14px;line-height:1.5}
+.case-quote + .case-top{margin-top:12px}
+.case-detail{display:none;margin-top:14px}
+.case.open .case-detail{display:block}
+.case-more{margin-top:12px;font-size:12px;font-weight:600;color:var(--brand);display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;user-select:none;padding:8px 0 2px}
+.case.open .case-more{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.case-more::after{content:'';width:6px;height:6px;border-right:1.5px solid var(--brand);border-bottom:1.5px solid var(--brand);transform:rotate(45deg);margin-top:-3px}
+.case.open .case-more::after{transform:rotate(-135deg);margin-top:2px}
+.cd-block{position:relative;border:1px solid #EFE6EA;border-radius:12px;background:#fff;padding:16px 12px 12px;margin-top:16px}
+.cd-block:first-child{margin-top:0}
+.cd-t{position:absolute;top:-9px;left:10px;font-size:11px;font-weight:600;color:var(--brand);background:#FDE8EF;border-radius:6px;padding:2px 8px;line-height:1.45}
+.cd-block p{font-size:13px;color:#6E6E6E;line-height:1.7;margin:0}
+.case-k{font-size:12px;font-weight:600;color:var(--ink);margin:10px 0 2px}
+.cd-block > .case-k:nth-child(2){margin-top:0}
+.case-ul{list-style:none}
+.case-ul li{font-size:12.5px;color:#6E6E6E;line-height:1.65;margin-top:4px}
+
+/* ============ 04 Offer ============ */
+.seg-mini{display:flex;background:#F5F5F5;border-radius:9px;padding:3px;margin-bottom:14px}
+.seg-sub{margin-top:-6px;margin-bottom:10px}
+.seg-mini .seg-item{height:34px;font-size:13px;padding:0 4px}
+.offer{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.offer-row{display:block;padding:0}
+.offer-row + .offer-row{border-top:1px solid #F5F5F5}
+.offer-line{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.offer-src{padding:0 16px 12px;margin-top:-4px;font-size:11px;color:var(--ink-3);line-height:1.45}
+.offer-lac{padding:12px 16px 14px;border-top:1px solid var(--line);background:#FAFAFA}
+.offer-lac span{display:block;font-size:12px;font-weight:700;color:var(--ink)}
+.offer-lac b{display:block;margin-top:4px;font-size:13px;font-weight:600}
+.offer-lac em{display:block;margin-top:6px;font-style:normal;font-size:11px;font-weight:500;color:var(--ink-3);line-height:1.4}
+.trust{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--ink-2)}
+.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--brand);display:inline-block}
+.tally{margin:0 0 18px;cursor:pointer}
+.tally:active{opacity:.75}
+.tally-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.tally-title{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.tally-sub{font-size:11.5px;color:var(--ink-3)}
+.tally-top{display:flex;align-items:baseline;gap:5px}
+.tally-num{font-size:28px;font-weight:800;color:var(--brand);line-height:1;letter-spacing:-.5px}
+.tally-unit{font-size:13px;font-weight:700;color:var(--brand)}
+.tally-txt{font-size:11.5px;color:var(--ink-2)}
+.tally-board{margin-top:10px;display:flex;flex-direction:column}
+.tb-row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-top:1px solid #F0F0F0}
+.tb-rank{flex:none;width:30px;font-size:11.5px;font-weight:700;color:var(--brand);letter-spacing:.2px}
+.tb-name{flex:1;min-width:0;font-size:13px;font-weight:600;color:var(--ink);line-height:1.3}
+.tb-num{flex:none;display:flex;align-items:baseline;gap:3px}
+.tb-num b{font-size:16px;font-weight:800;color:var(--brand);line-height:1}
+.tb-num span{font-size:10.5px;color:var(--ink-3)}
+.tally-foot{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tally-go{font-size:12px;font-weight:700;color:var(--brand)}
+.tally-note{flex:none;font-size:10px;color:var(--ink-3)}
+/* 生源地榜单弹窗 */
+.mask{position:absolute;inset:0;background:rgba(23,23,21,.45);z-index:96;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.mask.show{opacity:1;pointer-events:auto}
+.modal{width:calc(100% - 44px);max-height:78%;background:#fff;border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 8px}
+.modal-t{font-size:16px;font-weight:700;color:var(--ink)}
+.modal-x{flex:none;width:26px;height:26px;border-radius:50%;background:#F5F5F5;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-2);cursor:pointer}
+.modal .seg{margin:0 16px 8px}
+.modal-list{flex:1;overflow-y:auto;padding:0 16px}
+.modal-note{font-size:10.5px;color:var(--ink-3);line-height:1.6;padding:10px 16px 0;margin-top:8px;border-top:1px solid #F5F5F5}
+.of-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px}
+.of-left{display:flex;align-items:baseline;gap:6px;min-width:0}
+.of-rank{flex:none;width:26px;font-size:11px;color:var(--ink-3)}
+.of-name{font-size:13.5px;font-weight:600;color:var(--ink)}
+.of-right{flex:none;display:flex;align-items:baseline;gap:3px}
+.of-right b{font-size:16px;font-weight:800;color:var(--brand);line-height:1}
+.of-right span{font-size:10.5px;color:var(--ink-3)}
+.of-src{font-size:11px;color:var(--brand);padding:0 0 10px 32px;margin-top:-4px}
+.of-empty{font-size:12px;color:var(--ink-3);line-height:1.7;padding:24px 0;text-align:center}
+.modal-cta{padding:12px 16px 16px}
+.offer-left{display:flex;align-items:baseline;gap:6px;min-width:0}
+.offer-rank{flex:none;font-size:11px;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:5px;padding:2px 7px;min-width:22px;text-align:center;white-space:nowrap}
+.offer-note{margin-top:8px;font-size:10.5px;color:var(--ink-3);line-height:1.55}
+.offer-name{font-size:14px;font-weight:500}
+.badge{font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:3px;padding:1px 5px}
+.offer-right{display:flex;align-items:baseline;gap:2px;flex:none}
+.offer-right b{font-size:17px;font-weight:700;color:var(--brand)}
+.offer-right span{font-size:11px;color:var(--ink-3)}
+
+/* ============ 常见问题 ============ */
+.qa{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.qa + .qa{margin-top:10px}
+.qa-q{display:flex;align-items:flex-start;gap:10px;padding:14px;cursor:pointer}
+.qa-no{flex:none;font-size:10px;font-weight:700;color:var(--brand);letter-spacing:.1em;margin-top:3px}
+.qa-title{flex:1;font-size:13.5px;font-weight:600;line-height:1.5}
+.qa-arrow{flex:none;width:16px;height:16px;margin-top:3px;position:relative}
+.qa-arrow::before,.qa-arrow::after{content:'';position:absolute;background:var(--ink-3);border-radius:2px;transition:transform .2s}
+.qa-arrow::before{left:3px;top:7.5px;width:10px;height:1.5px}
+.qa-arrow::after{left:7.5px;top:3px;width:1.5px;height:10px}
+.qa.on .qa-arrow::after{transform:scaleY(0)}
+.qa-a{display:none;padding:0 14px 14px}
+.qa.on .qa-a{display:block}
+.qa-li{display:flex;gap:8px;font-size:12.5px;line-height:1.65;color:var(--ink-2)}
+.qa-li + .qa-li{margin-top:8px}
+.qa-li::before{content:'';flex:none;width:4px;height:4px;border-radius:50%;background:var(--brand);margin-top:8px}
+.qa-li b{color:var(--ink);font-weight:600}
+
+/* ============ 08 社群 + 在线客服 ============ */
+.comm{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px}
+.comm-head{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid #F5F5F5}
+.comm-avatars{display:flex;flex:none}
+.comm-avatars img{width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--brand-soft);border:2px solid #fff}
+.comm-avatars img + img{margin-left:-10px}
+.comm-meta{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.comm-meta b{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.comm-benefits{display:flex;flex-direction:column;gap:10px;padding:14px 0 16px}
+.comm-imgs{margin:-4px 0 12px;display:flex;flex-direction:column;gap:4px}
+.ci{width:100%;border-radius:8px;display:block;border:1px solid var(--line)}
+.ci-cap{font-size:10.5px;color:var(--ink-3);margin:2px 0 8px}
+.comm-qr{display:flex;align-items:center;gap:12px;background:var(--brand-soft);border-radius:10px;padding:10px 12px;margin-bottom:14px}
+.comm-qr img{width:96px;height:auto;border-radius:6px;display:block;flex:none}
+.cq-r{min-width:0}
+.cq-r b{display:block;font-size:13px;font-weight:700;color:var(--ink)}
+.cq-r span{display:block;font-size:11px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.cb{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.cb b{color:var(--brand);font-weight:600;margin-right:8px}
+/* 悬浮在线客服 */
+.cs-btn{position:absolute;right:12px;bottom:100px;z-index:70;width:52px;height:52px;padding:0;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 4px 16px rgba(23,23,21,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;font-family:var(--sans);color:var(--brand);font-size:10px}
+.cs-btn i{width:3px;height:3px;border-radius:50%;background:var(--brand);display:block}
+.anchors{position:absolute;right:0;top:108px;bottom:164px;z-index:46;display:flex;flex-direction:column;justify-content:center;gap:0}
+.anchors button{appearance:none;border:0;background:transparent;margin:0;padding:0 8px 0 0;height:26px;display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:var(--sans);font-size:0;font-weight:600;color:var(--brand);line-height:1;cursor:pointer}
+.anchors button::after{content:'';flex:none;width:5px;height:5px;border-radius:50%;background:#D8D8D8}
+.anchors button.on{font-size:10px;background:rgba(255,255,255,.94);border-radius:99px 0 0 99px;padding-left:8px;box-shadow:0 2px 8px rgba(23,23,21,.08)}
+.anchors button.on::after{width:6px;height:6px;background:var(--brand)}
+
+/* ============ 05 测评工具 ============ */
+.tools{display:flex;flex-direction:column;gap:10px}
+.tool{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;cursor:pointer}
+.tool:active{background:#FAFAFA}
+.tool-top{display:flex;align-items:center;gap:8px}
+.tool-no{font-size:10px;font-weight:700;color:var(--brand);letter-spacing:.1em}
+.tool-kind{font-size:10px;color:var(--brand);background:var(--brand-soft);border-radius:99px;padding:2px 7px;margin-left:auto}
+.tool-name{font-size:16px;font-weight:600;margin-top:7px}
+.tool-desc{font-size:12.5px;color:var(--ink-2);line-height:1.6;margin-top:3px}
+.tool-cta{margin-top:11px;font-size:12.5px;font-weight:600;color:var(--brand)}
+
+/* 选校工具 */
+.picker{margin-top:10px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px}
+.picker-row{margin-bottom:13px}
+.picker-label{font-size:12px;color:var(--ink-3);margin-bottom:7px}
+.picker-chips{display:flex;flex-wrap:wrap;gap:6px}
+.p-chip{font-size:12px;color:var(--ink-2);background:#FAFAFA;border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
+.p-chip.on{background:var(--brand-soft);border-color:rgba(206,61,110,.35);color:var(--brand);font-weight:600}
+.picker .btn{height:40px;font-size:14px}
+.result{margin-top:13px;border:1px solid rgba(206,61,110,.22);background:var(--brand-soft);border-radius:12px;padding:14px}
+.res-title{font-size:13px;font-weight:600;color:var(--brand)}
+.res-row{display:flex;gap:10px;margin-top:9px;font-size:12.5px;line-height:1.6}
+.res-row dt{flex:none;width:52px;color:var(--brand);font-weight:600}
+.res-row dd{flex:1;color:var(--ink)}
+.res-note{margin-top:11px;font-size:11px;color:var(--ink-3);line-height:1.6}
+.result .btn{margin-top:12px;height:40px;font-size:14px}
+
+/* ============ 05 表单 ============ */
+.form-card{padding:18px 16px}
+.form-intent{margin-bottom:10px;font-size:12px;color:var(--ink-3);background:var(--brand-soft);border:1px solid rgba(206,61,110,.18);border-radius:8px;padding:8px 12px}
+.form-intent b{color:var(--brand);font-weight:600}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;color:var(--ink-2);margin-bottom:6px}
+.field input{width:100%;height:44px;background:#FAFAFA;border:1px solid var(--line);border-radius:8px;padding:0 12px;font-size:14px;color:var(--ink);font-family:var(--sans);outline:none;transition:border-color .18s,background .18s}
+.field input:focus{border-color:var(--brand);background:#fff}
+.field input::placeholder{color:#B8B8B8}
+.field.err input{border-color:var(--danger);background:#FDF5F4}
+.err-msg{display:none;font-size:11.5px;color:var(--danger);margin-top:5px}
+.field.err .err-msg{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:13px;padding:8px 14px;border-radius:8px;background:#FAFAFA;border:1px solid var(--line);color:var(--ink-2);cursor:pointer;transition:all .16s}
+.chip:active{transform:scale(.96)}
+.chip.on{background:var(--brand-soft);border-color:var(--brand);color:var(--brand);font-weight:600}
+.agree{display:flex;align-items:flex-start;gap:7px;margin:16px 0 14px;cursor:pointer}
+.check{width:16px;height:16px;border-radius:4px;border:1px solid #CCCCCC;background:#fff;flex:none;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .16s}
+.check.on{background:var(--brand);border-color:var(--brand)}
+.check svg{opacity:0;transition:opacity .16s}
+.check.on svg{opacity:1}
+.agree p{font-size:11.5px;color:var(--ink-2);line-height:1.6}
+.agree a{color:var(--brand);text-decoration:none}
+.form-note{margin-top:10px;font-size:11px;color:var(--ink-3);text-align:center}
+
+/* 成功 */
+.done{text-align:center;padding:12px 4px 6px}
+.done .tick{width:52px;height:52px;border-radius:50%;background:var(--brand-soft);margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+.done h3{font-size:17px;font-weight:600;margin-bottom:6px}
+.done p{font-size:12.5px;color:var(--ink-2);line-height:1.7;margin-bottom:18px}
+.advisor{display:flex;align-items:center;gap:11px;background:#FAFAFA;border-radius:10px;padding:12px;margin-bottom:16px;text-align:left}
+.advisor img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none}
+.advisor b{display:block;font-size:13.5px}
+.advisor span{font-size:11.5px;color:var(--ink-3)}
+.advisor .on{margin-left:auto;font-size:10.5px;color:var(--brand);border:1px solid rgba(206,61,110,.3);border-radius:99px;padding:2px 8px}
+
+/* ============ 底部栏 ============ */
+.dock{position:absolute;left:0;right:0;bottom:0;z-index:45;display:flex;align-items:center;gap:12px;padding:10px 16px 22px;background:#fff;border-top:1px solid var(--line)}
+.dock-tools{flex:1;min-width:0;display:flex;gap:6px}
+.dt{flex:1;height:38px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap;transition:background .18s,color .18s}
+.dt:active{background:var(--brand-soft);color:var(--brand);border-color:var(--brand)}
+.dock .btn{width:78px;height:40px;font-size:13px;border-radius:8px;padding:0}
+
+/* toast */
+.pop-join{position:absolute;left:16px;right:76px;bottom:108px;z-index:72;background:#fff;border:1px solid rgba(206,61,110,.28);border-radius:14px;padding:14px 14px 12px;box-shadow:0 10px 28px rgba(23,23,21,.16);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s,transform .25s}
+.pop-join.show{opacity:1;transform:none;pointer-events:auto}
+.pop-join[hidden]{display:none}
+.pop-faces{display:flex;align-items:center;margin-bottom:8px}
+.pop-faces img{width:28px;height:28px;border-radius:50%;object-fit:cover;background:var(--brand-soft);border:2px solid #fff}
+.pop-faces img + img{margin-left:-8px}
+.pop-join b{display:block;font-size:14px;font-weight:700;padding-right:16px;line-height:1.4}
+.pop-join p{margin-top:4px;font-size:12px;color:var(--ink-2);line-height:1.45}
+.pop-join .btn{margin-top:10px;height:36px;font-size:13px}
+.pop-x{position:absolute;right:8px;top:6px;border:0;background:transparent;color:#9A9A9A;font-size:14px;line-height:1;cursor:pointer;font-family:var(--sans)}
+.toast{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);background:rgba(23,23,21,.88);color:#fff;font-size:12.5px;padding:10px 16px;border-radius:8px;z-index:95;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;max-width:270px;text-align:center;line-height:1.6}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+</style>
+</head>
+<body style="">
+<div class="stage">
+  <div class="caption">微信小程序 · 艺术爬藤专题页 · 高保真原型<br>390 × 844 · 微信默认导航栏</div>
+  <div class="device">
+    <div class="screen" id="screen">
+      <div class="page">
+
+        <div class="sec" id="secOffer">
+          <div class="sec-head">
+            <div class="sec-title">艺术爬藤 offer 榜</div>
+            <p class="sec-sub">美本按 US News 名次排列。英国、中国香港、新加坡按 QS 名次排列。</p>
+          </div>
+          <div class="seg seg-mini" id="segOffer">
+            <div class="seg-item on" data-o="us">美本</div>
+            <div class="seg-item" data-o="ukhk">英国 · 港新</div>
+          </div>
+          <div class="offer" id="offerBox"></div>
+          <div class="offer-note" id="offerNote">排名口径：US News 全美大学排名，按名次从高到低排列。</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Hero -->
+        <div class="hero">
+          <h1>GPA 3.7，也能上藤校<br><em>关键是加一份作品集</em></h1>
+          
+
+          <!-- 证据面板：同一份成绩 → 两个结果 -->
+          <div class="proof">
+            <div class="proof-head"><span>同一份成绩，两种结果</span><b>GPA 3.7 · 托福 108 · SAT 1500</b></div>
+            <div class="proof-cmp">
+              <div class="pc-cell plain">
+                <span class="pc-tag">只拼分数</span>
+                <div class="pc-rank">TOP50<small>上下</small></div>
+                <div class="pc-schools">宾州州立 · 俄亥俄州立</div>
+                <div class="pc-extra pc-extra-plain">材料雷同，拉不开差距</div>
+              </div>
+              <div class="pc-mid"><svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10V2.2M2.6 5.6 6 2.2l3.4 3.4"></path></svg></div>
+              <div class="pc-cell hi">
+                <span class="pc-tag">＋作品集</span>
+                <div class="pc-rank">TOP30<span class="pc-delta">↑ 20 名</span></div>
+                <div class="pc-schools">康奈尔 · 卡梅 · 纽大</div>
+                <div class="pc-extra">还够到 英国 G5 · 港前三</div>
+              </div>
+            </div>
+            <div class="proof-foot">同档背景的常见结果区间，因个人背景与材料而异</div>
+          </div>
+        </div>
+
+        <div class="sec" id="secPath">
+          <div class="sec-head">
+            <div class="sec-title" style="font-weight:700">艺术爬藤三大路径</div>
+            <div class="sec-sub">先对上孩子现在的情况，再看该走哪一条。</div>
+          </div>
+          <div class="path-rail" id="pathRail">
+            <button type="button" class="rail-card" data-p="0">
+              <span class="sit">孩子成绩中等，够不着梦校</span>
+              <span class="pname">艺术爬藤 ›</span>
+            </button>
+            <button type="button" class="rail-card" data-p="1">
+              <span class="sit">孩子成绩不错，但没特点</span>
+              <span class="pname">艺术特长爬藤 ›</span>
+            </button>
+            <button type="button" class="rail-card on" data-p="2">
+              <span class="sit">已确定把艺术作为长期职业方向</span>
+              <span class="pname">爬艺术藤校 ›</span>
+            </button>
+          </div>
+          <div class="card" id="pathBox"><div class="path">
+    
+    <p class="lead">不走综合排名，直奔<em>全球顶尖艺术学院</em>。</p>
+    <div class="meta">
+      <div class="meta-row"><dt>作品集</dt><dd><em>决定性材料</em>，几乎直接决定录取</dd></div>
+      <div class="meta-row"><dt>审核方</dt><dd>以<em>作品集评审</em>为主</dd></div>
+      <div class="meta-row"><dt>准备周期</dt><dd>建议 <em>18–24 个月</em></dd></div>
+    </div>
+    <div class="bullets"><div class="bullet"><i>✓</i><div><b>适合：</b>已确定把艺术作为长期职业方向</div></div><div class="bullet"><i>✓</i><div><b>关键：</b>个人表达与技法同等重要，要有自己的语言</div></div></div>
+  </div></div>
+          <div class="path-else">
+            <button type="button" data-t="quiz"><b>孩子想走艺术，不知从哪开始</b><em>做 30 秒测评 ›</em></button>
+            <button type="button" data-t="explore"><b>不确定孩子适不适合</b><em>看潜力探索 ›</em></button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 02-1 申请逻辑：三位一体 -->
+        <div class="sec" id="secLogic">
+          <div class="tri2">
+            <div class="tri2-title">艺术爬藤申请逻辑</div>
+            <div class="tri2-row">
+              <div class="tri2-col">
+                <div class="tri2-dot">活动</div>
+                <div class="tri2-name">主线清晰</div>
+              </div>
+              <div class="tri2-col">
+                <div class="tri2-dot">文书</div>
+                <div class="tri2-name">讲清动机</div>
+              </div>
+              <div class="tri2-col">
+                <div class="tri2-dot">作品集</div>
+                <div class="tri2-name">呈现思考</div>
+              </div>
+            </div>
+            <div class="tri2-c">
+              <div class="tc-s tc-s-l"></div>
+              <div class="tc-s tc-s-m"></div>
+              <div class="tc-s tc-s-r"></div>
+              <div class="tc-h"></div>
+              <div class="tc-down"></div>
+            </div>
+            <div class="tri2-result">= 鲜明的申请人形象</div>
+            <p class="tri2-note">招生官 30 秒内记住你是谁，而不是第几个 GPA 3.7</p>
+          </div>
+          <div class="evid">
+          <div class="yale-card">
+            <div class="yale-card-h">
+              <span class="yale-card-tag">官网原文</span>
+              <span class="yale-card-t">耶鲁招生办：成绩之外，我们看什么</span>
+            </div>
+            <div class="yale-shot">
+              <img src="assets/yale-what-we-look-for.jpg" alt="耶鲁大学本科招生官网 What we look for 原文">
+            </div>
+            <div class="yale-card-f">截图自耶鲁大学本科招生官网「What we look for」：学术潜力之外，明确列出批判性思维、好奇心、创造力、社区贡献等维度。</div>
+          </div>
+          <div class="gate-sub">
+            <div class="gate-sub-t">落到分数上：同一所大学，两种门槛</div>
+          </div>
+          <div class="gate">
+            <table class="gate-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>商科 / 工程</th>
+                  <th class="hi">艺术专业</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>康奈尔大学</th>
+                  <td>GPA <b>3.9+</b><br>托福 <b>112+</b><br>SAT <b>1550+</b></td>
+                  <td class="hi">GPA <b>3.7</b><br>托福 <b>109</b><br>SAT <b>免提交</b></td>
+                </tr>
+                <tr>
+                  <th>纽约大学</th>
+                  <td>GPA <b>3.8+</b><br>托福 <b>110+</b><br>SAT <b>1540+</b></td>
+                  <td class="hi">GPA <b>3.6</b><br>托福 <b>103</b><br>SAT <b>免提交</b></td>
+                </tr>
+                <tr>
+                  <th>俄亥俄州立</th>
+                  <td>GPA <b>3.7+</b><br>托福 <b>105+</b><br>SAT <b>1450+</b></td>
+                  <td class="hi">GPA <b>3.3</b><br>托福 <b>93</b><br>SAT <b>免提交</b></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="gate-cap">门槛为近年录取的常见参考区间，具体以学校当年官方要求为准</div>
+          </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 03 申请时间轴 -->
+        <div class="sec" id="secTl">
+          <div class="sec-head">
+            <div class="sec-title">艺术爬藤时间规划</div>
+            <p class="sec-sub">6–12 年级，每一步怎么走。</p>
+          </div>
+          <div id="dims"></div>
+          <div class="stair-goal">申请画像是被一步步证明出来的，不是最后临时写出来的。</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 03b 代表性案例：照着这条线走的人，后来怎样了 -->
+        <div class="sec" id="secCases">
+          <div class="sec-head">
+            <div class="sec-title" style="font-size:24px">艺术爬藤案例</div>
+          </div>
+          <div class="seg case-seg" id="caseSeg">
+            <div class="seg-item" data-k="0">艺术爬藤</div>
+            <div class="seg-item" data-k="1">特长爬藤</div>
+            <div class="seg-item on" data-k="2">爬艺术藤校</div>
+          </div>
+          <div class="case-grid">
+            <div class="case" id="caseDeng" data-k="0" hidden>
+              <div class="case-top"><span class="case-school">康奈尔大学</span><span class="case-major">时尚设计</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>邓同学</div>
+                <div class="case-meta-i"><span>高中</span>北京一零一中学国际部</div>
+                <div class="case-meta-i"><span>GPA</span>3.85/4</div>
+                <div class="case-meta-i"><span>AP</span>4门5分，1门4分</div>
+                <div class="case-meta-i"><span>成绩</span>托福109；无SAT</div>
+              </div>
+              <div class="case-detail">
+                <div class="cd-block">
+                  <div class="cd-t">活动实践背景</div>
+                  <div class="case-k">专业相关</div>
+                  <ul class="case-ul">
+                    <li>承接校园活动和社团设计委托，为学校舞蹈队设计演出服装</li>
+                    <li>Wang Xiaohe 时装有限公司实习，参与服装设计流程</li>
+                    <li>北京怡宁医院精神科艺术治疗实习，研究不同艺术媒介对老年患者的治疗效果</li>
+                  </ul>
+                  <div class="case-k">公益活动</div>
+                  <ul class="case-ul">
+                    <li>一零一 ID Psychology Club 创始人</li>
+                    <li>一零一英语助教志愿者，为内蒙古学校的学生朗读英语启蒙读物</li>
+                    <li>WABC China 艺术志愿者，开展学习障碍儿童月度在线艺术课程</li>
+                  </ul>
+                  <div class="case-k">个人特质及其他</div>
+                  <ul class="case-ul"><li>“Lady Bird 伯德小姐”个人品牌打造</li></ul>
+                </div>
+                <div class="cd-block">
+                  <div class="cd-t">奖项荣誉</div>
+                  <ul class="case-ul">
+                    <li>SGADC新加坡艺术设计大赛铜奖</li>
+                    <li>全球艺术中国设计新锐奖</li>
+                    <li>芬兰-中国国际文化艺术交流双年展铜奖</li>
+                    <li>CTB + HOSA</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="case" id="caseFei" data-k="0" hidden>
+              <div class="case-top"><span class="case-school">康奈尔大学</span><span class="case-major">纯艺术 BFA in Fine Arts</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>费同学</div>
+                <div class="case-meta-i"><span>高中</span>Toronto French School</div>
+                <div class="case-meta-i"><span>GPA</span>IB 36/45</div>
+                <div class="case-meta-i"><span>成绩</span>免语言；SAT 1440（拼分）</div>
+              </div>
+              <div class="case-detail">
+                <div class="cd-block">
+                  <div class="cd-t">活动实践背景</div>
+                  <div class="case-k">专业相关</div>
+                  <ul class="case-ul">
+                    <li>中央美院（CAFA）生物设计实验室材料研究</li>
+                    <li>生态装置APP设计</li>
+                    <li>今日美术馆展览</li>
+                  </ul>
+                  <div class="case-k">夏校</div>
+                  <ul class="case-ul"><li>斯芬克X康奈尔爬藤夏校</li></ul>
+                  <div class="case-k">社团</div>
+                  <ul class="case-ul">
+                    <li>FTC机器人</li>
+                    <li>Nuit de Code编程活动</li>
+                    <li>TFS艺术委员会</li>
+                  </ul>
+                </div>
+                <div class="cd-block">
+                  <div class="cd-t">奖项荣誉</div>
+                  <ul class="case-ul">
+                    <li>Prix d'Excellence d'Art</li>
+                    <li>亚洲数字艺术展</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="case" id="caseFlora" data-k="0" hidden>
+              <div class="case-top"><span class="case-school">卡内基梅隆大学</span><span class="case-major">Bachelor of Design</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>Flora</div>
+                <div class="case-meta-i"><span>高中</span>上海中学国际部</div>
+                <div class="case-meta-i"><span>GPA</span>3.64/4</div>
+                <div class="case-meta-i"><span>成绩</span>托福109；SAT1470</div>
+              </div>
+              <div class="case-detail">
+                <div class="cd-block">
+                  <div class="cd-t">活动实践背景</div>
+                  <div class="case-k">专业相关</div>
+                  <ul class="case-ul">
+                    <li>心理 booklet 设计小组设计师</li>
+                    <li>音乐剧社团周边产品设计师</li>
+                  </ul>
+                  <div class="case-k">夏校</div>
+                  <ul class="case-ul"><li>斯芬克 x ACCD 夏校</li></ul>
+                  <div class="case-k">公益与社会责任感</div>
+                  <ul class="case-ul">
+                    <li>G11上博埃及展导览员/平面设计师</li>
+                    <li>斯芬克 WABC 公益</li>
+                  </ul>
+                  <div class="case-k">领导力</div>
+                  <ul class="case-ul"><li>G11-12学校 yearbook 设计师/负责人</li></ul>
+                </div>
+                <div class="cd-block">
+                  <div class="cd-t">奖项荣誉</div>
+                  <ul class="case-ul">
+                    <li>香港数字艺术设计大赛-第三名</li>
+                    <li>TRANS-A亚洲设计创新奖-银奖</li>
+                    <li>第23届世界华文学生作文大赛-三等奖</li>
+                    <li>学校艺术学者奖</li>
+                    <li>学校三好学生奖</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="case" id="caseYale" data-k="1" hidden>
+              <div class="case-top"><span class="case-school">耶鲁大学</span><span class="case-major">机械工程</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>某同学</div>
+                <div class="case-meta-i"><span>方向</span>机械工程等非艺术专业，作品集作为补充材料</div>
+              </div>
+            </div>
+            <div class="case" id="caseCornellMe" data-k="1" hidden>
+              <div class="case-top"><span class="case-school">康奈尔大学</span><span class="case-major">机械工程</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>某同学</div>
+                <div class="case-meta-i"><span>方向</span>机械工程，作品集作为补充材料</div>
+              </div>
+            </div>
+            <div class="case" id="caseStanford" data-k="1" hidden>
+              <div class="case-top"><span class="case-school">斯坦福大学</span><span class="case-major">工程</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>某同学</div>
+                <div class="case-meta-i"><span>方向</span>工程专业，作品集作为补充材料</div>
+              </div>
+            </div>
+            <div class="case" id="casePenn" data-k="1" hidden>
+              <div class="case-top"><span class="case-school">宾夕法尼亚大学</span><span class="case-major">设计 / 人类学</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>某同学</div>
+                <div class="case-meta-i"><span>方向</span>设计 / 人类学，作品集作为补充材料</div>
+              </div>
+            </div>
+            <div class="case" id="casePan" data-k="2">
+              <div class="case-top"><span class="case-school">布朗大学 + 罗德岛设计学院</span><span class="case-major">双学位 · 服装设计</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>潘同学</div>
+                <div class="case-meta-i"><span>成绩</span>全A · SAT 1500+</div>
+                <div class="case-meta-i"><span>背景</span>藤校夏校 · 国家级艺术竞赛金奖</div>
+              </div>
+            </div>
+            <div class="case" id="caseHuang" data-k="0" hidden>
+              <img class="case-shot" src="assets/case-oxford.jpg" alt="黄祎含站在自己的作品前">
+              <div class="case-quote">从中考区排9000名，到牛津大学的“逆袭之旅”</div>
+              <div class="case-top"><span class="case-school">牛津大学</span><span class="case-major">纯艺 Fine Art</span></div>
+              <div class="case-meta">
+                <div class="case-meta-i"><span>学生</span>黄祎含</div>
+                <div class="case-meta-i"><span>高中</span><b class="case-hl">斯芬克国际艺术高中</b></div>
+                <div class="case-meta-i"><span>GPA</span><b class="case-hl">4.2/5</b></div>
+                <div class="case-meta-i"><span>AP</span><b class="case-hl">2D设计5，3D设计5</b>，心理学5，微观经济学5</div>
+                <div class="case-meta-i"><span>BTEC</span><b class="case-hl">Merit</b></div>
+                <div class="case-meta-i"><span>语言</span>雅思7.0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="sec" id="secAdv">
+          <div class="sec-head">
+            <div class="sec-title">国际课程提升</div>
+            <p class="sec-sub">国际课程是高中里的 AP、A-Level、IB。艺术课选进去，分数进成绩单，创作收进作品集。</p>
+          </div>
+          <div class="ic-pair">
+            <div class="ic-a"><b>提升学术</b><span>按这门课的规则计分，直接写进成绩单。</span></div>
+            <div class="ic-w"><b>提升作品集</b><span>课上的调研和成品，就是作品集项目。</span></div>
+          </div>
+          <div class="courses">
+            <div class="crow ap">
+              <div class="crow-h"><b>AP</b><span>英美港都能用</span></div>
+              <div class="crow-b">
+                <div class="chips"><span>2D 设计</span><span>3D 设计</span><span>绘画</span><span>艺术史</span></div>
+                <div class="ln"><b>学术</b><span>设计类不笔试，作品就是考卷。普通课 A 计 4.0，AP 的 A 计 5.0。艺术史考 3 小时。</span></div>
+                <div class="ln"><b>作品</b><span>交出去的那组成品，可按美本要求直接当作品集。</span></div>
+              </div>
+            </div>
+            <div class="crow al">
+              <div class="crow-h"><b>A-Level</b><span>英本 / 港新</span></div>
+              <div class="crow-b">
+                <div class="chips"><span>平面</span><span>3D</span><span>综合</span><span>纯艺</span><span>面料</span><span>摄影</span></div>
+                <div class="ln"><b>学术</b><span>按 A*–E 计入成绩。培生爱得思、牛津考试局双重认证。</span></div>
+                <div class="ln"><b>作品</b><span>个人调研和命题创作，就是作品集里的项目。</span></div>
+              </div>
+            </div>
+            <div class="crow ib">
+              <div class="crow-h"><b>IB</b><span>全球通用</span></div>
+              <div class="crow-b">
+                <div class="chips"><span>Visual Arts SL</span><span>Visual Arts HL</span></div>
+                <div class="ln"><b>学术</b><span>按 1–7 分计入 IB 成绩。</span></div>
+                <div class="ln"><b>作品</b><span>探究档案、关联研究或艺术家项目，加上 5 件完成作品，构成作品集。</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 05 服务团队 -->
+        <div class="sec" id="secTeam">
+          
+          
+          <div class="sec-head">
+            <div class="sec-title">服务体系</div>
+          </div>
+          <div class="flow">
+            <!-- 主导师 -->
+            <div class="node-lead">
+              <img src="assets/mentor-1.png" alt="主导师">
+              <div>
+                <div class="n-name">主导师 <span>全程总指挥</span></div>
+                <div class="n-desc">定申请方向与阶段目标，统筹选校定位、文书主线与六方节奏</div>
+              </div>
+            </div>
+
+            <!-- 连线：主导师 → 双线 -->
+            <svg class="conn" viewBox="0 0 320 34" preserveAspectRatio="none">
+              <path d="M160 0 V14 M84 14 H236 M84 14 V34 M236 14 V34" fill="none" stroke="#E0E0E0" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+              <circle cx="84" cy="34" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
+              <circle cx="236" cy="34" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
+            </svg>
+
+            <!-- 双线 -->
+            <div class="branch">
+              <div class="branch-col">
+                <div class="branch-title">学 术 线</div>
+                <div class="mentor" data-role="规划 &amp; 选校导师">
+                  <img src="assets/mentor-2.png" alt="规划与选校导师">
+                  <div>
+                    <div class="m-name">规划 &amp; 选校导师</div>
+                    <div class="m-duty">课程、标化与背景提升排期，制定选校梯度</div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="文书指导老师">
+                  <img src="assets/mentor-3.png" alt="文书指导老师">
+                  <div>
+                    <div class="m-name">文书指导老师</div>
+                    <div class="m-duty">主文书、补充文书与活动列表的主线梳理</div>
+                  </div>
+                </div>
+              </div>
+              <div class="branch-col">
+                <div class="branch-title">艺 术 线</div>
+                <div class="mentor" data-role="教研导师">
+                  <img src="assets/mentor-4.png" alt="教研导师">
+                  <div>
+                    <div class="m-name">教研导师</div>
+                    <div class="m-duty">作品集主题、创作与呈现，定期评估进度质量</div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="海外导师">
+                  <img src="assets/mentor-5.png" alt="海外导师">
+                  <div>
+                    <div class="m-name">海外导师</div>
+                    <div class="m-duty">按海外院校评审标准深化作品、拓展专业认知</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 连线：双线 → 教务 -->
+            <svg class="conn" viewBox="0 0 320 34" preserveAspectRatio="none">
+              <path d="M84 0 V20 M236 0 V20 M84 20 H236 M160 20 V34" fill="none" stroke="#E0E0E0" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+              <circle cx="160" cy="34" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
+            </svg>
+
+            <!-- 教务 -->
+            <div class="node-base">
+              <img src="assets/mentor-6.png" alt="教务老师">
+              <div>
+                <div class="n-name">教务老师</div>
+                <div class="n-desc">任务排期与节点提醒，发现进度偏差及时协调</div>
+              </div>
+              <div class="n-badge">全程</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 07 常见问题 -->
+        <div class="sec" id="secFaq">
+          <div class="sec-head">
+            <div class="sec-title">常见问题</div>
+            <p class="sec-sub">投入、适不适合、成绩和多地区申请，点开看答案。</p>
+          </div>
+          <div id="qaBox"><div class="qa" data-i="0">
+  <div class="qa-q"><span class="qa-no">Q1</span><div class="qa-title">艺术爬藤到底值不值得投入？投入作品集，能不能换来差异化竞争力？</div><div class="qa-arrow"></div></div>
+  <div class="qa-a"><div class="qa-li"><b>值不值，看它换来什么。</b>同样 GPA 3.7，只拼分数是「第几百个 3.7」；加作品集是「那个做 XX 项目的学生」。</div><div class="qa-li"><b>它是少数你能主动塑造的材料。</b>分数和竞赛靠天赋与运气，作品集靠规划和投入，结果更可控。</div><div class="qa-li"><b>投入量按路径来。</b>艺术爬藤最依赖作品集，艺术特长爬藤中等投入就能制造记忆点，不用一上来就全力投入。</div></div>
+</div><div class="qa" data-i="1">
+  <div class="qa-q"><span class="qa-no">Q2</span><div class="qa-title">孩子之前没怎么接触艺术，怎么验证他适不适合、做兴趣探索？</div><div class="qa-arrow"></div></div>
+  <div class="qa-a"><div class="qa-li"><b>先上一节艺术课堂体验。</b>看的是投入度和反馈，不是画得好不好——愿意继续做下去才有戏。</div><div class="qa-li"><b>再做一个小项目（2–4 周）。</b>观察能否独立完成从选题、调研到成品的完整过程。</div><div class="qa-li"><b>最后按作品集标准评估。</b>是缺技法还是缺兴趣：技法能补，兴趣补不了，后者不建议转轨。</div></div>
+</div><div class="qa" data-i="2">
+  <div class="qa-q"><span class="qa-no">Q3</span><div class="qa-title">AP、A-Level 等艺术类国际课程，怎么一边提升艺术能力、一边拉高成绩单？</div><div class="qa-arrow"></div></div>
+  <div class="qa-a"><div class="qa-li"><b>艺术课成绩本身就是成绩单的一部分。</b>AP / A-Level Art &amp; Design 的学分计入 GPA，不是「课外活动」。</div><div class="qa-li"><b>课程作业可以复用成作品集项目。</b>一份投入两处产出，不必分两套体系准备。</div><div class="qa-li"><b>选课前先确认学分是否被认可。</b>按目标院校要求选课，避免学了不计分或课程难度不匹配。</div></div>
+</div><div class="qa" data-i="3">
+  <div class="qa-q"><span class="qa-no">Q4</span><div class="qa-title">英美港新多地区同时申请，时间轴怎么规划更合理？</div><div class="qa-arrow"></div></div>
+  <div class="qa-a"><div class="qa-li"><b>按最早截止的地区倒推主线。</b>牛津剑桥 10 月中，美本 ED 11 月，港校 11 月–次年 1 月，美本 RD 1 月，新加坡 2–3 月。</div><div class="qa-li"><b>作品集在 11 年级暑期前完成 80%。</b>之后只做地区差异化调整：英国更看调研过程，美本更看个人表达。</div><div class="qa-li"><b>文书分地区写，主线必须一致。</b>各地区侧重可以不同，但「你是谁」这条主线不能分裂。</div></div>
+</div></div>
+        </div>
+
+        <!-- 08 社群 + 在线客服 -->
+        <div class="sec" id="secCommunity">
+          <div class="sec-head">
+            <div class="sec-title">还想再看看？先加入爬藤家长社群</div>
+            <p class="sec-sub">不急着做决定也没关系，先把信息搞明白。</p>
+          </div>
+          <div class="comm">
+            <div class="comm-head">
+              <div class="comm-avatars">
+                <img src="assets/mentor-2.png" alt="家长"><img src="assets/mentor-4.png" alt="家长"><img src="assets/mentor-5.png" alt="家长">
+              </div>
+              <div class="comm-meta"><b>艺术爬藤家长交流群</b>2,800+ 位家长在群里，全年 20+ 场主题分享</div>
+            </div>
+            <div class="comm-benefits">
+              <div class="cb"><b>干货讲座</b>全年 20+ 场，覆盖规划、选校、背提、申请、录取</div>
+              <div class="cb"><b>资料包</b>10 份独家 PDF，进群直接领</div>
+              <div class="cb"><b>名师答疑</b>15 年经验导师群内在线答疑</div>
+              <div class="cb"><b>1v1 诊断</b>可预约 30 分钟个性化评估</div>
+            </div>
+            <div class="comm-imgs">
+              <img class="ci" src="assets/comm-covers.jpg" alt="社群资料包实物">
+              <div class="ci-cap">10 份资料包，进群直接领全套</div>
+              <img class="ci" src="assets/comm-qa.jpg" alt="社群答疑实录">
+              <div class="ci-cap">往期答疑实录：进群接龙提问，导师群里答</div>
+            </div>
+            
+            <button class="btn btn-primary" id="joinComm">加入社群，领取爬藤资料包</button>
+            <button class="btn btn-plain" id="openChat">不进群，先和顾问聊 5 分钟 ›</button>
+          </div>
+        </div>
+
+        <div class="sec" id="secTools" hidden>
+          <div class="picker" id="picker" hidden>
+            <div class="picker-row">
+              <div class="picker-label">目前成绩大概在</div>
+              <div class="picker-chips" data-pk="gpa">
+                <div class="p-chip" data-v="0">3.8 及以上</div>
+                <div class="p-chip" data-v="1">3.5–3.7</div>
+                <div class="p-chip" data-v="2">3.2–3.4</div>
+                <div class="p-chip" data-v="3">3.2 以下</div>
+              </div>
+            </div>
+            <div class="picker-row">
+              <div class="picker-label">作品集做到哪了</div>
+              <div class="picker-chips" data-pk="folio">
+                <div class="p-chip" data-v="0">还没开始</div>
+                <div class="p-chip" data-v="1">正在做</div>
+                <div class="p-chip" data-v="2">已经能交</div>
+              </div>
+            </div>
+            <div class="picker-row">
+              <div class="picker-label">目标地区</div>
+              <div class="picker-chips" data-pk="region">
+                <div class="p-chip" data-v="us">美本</div>
+                <div class="p-chip" data-v="uk">英国</div>
+                <div class="p-chip" data-v="hk">中国香港</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="pickBtn" type="button">看我的选校区间</button>
+            <div id="pickResult"></div>
+          </div>
+        </div>
+        
+
+        <div class="divider"></div>
+        <!-- ================= 10 表单 ================= -->
+        <div class="sec" id="formSec">
+          <div class="sec-head">
+            <div class="sec-title" style="font-size:24px">现在开始，还来得及吗？</div>
+            <p class="sec-sub">留下信息，顾问先做一次 30 分钟诊断：孩子适合哪条路径、现在该做什么。</p>
+          </div>
+
+          <div class="form-intent" id="formIntent" hidden=""></div>
+
+          <div class="card form-card" id="formCard">
+            <div class="field" id="fName">
+              <label>学生姓名</label>
+              <input id="iName" placeholder="请输入学生姓名">
+              <div class="err-msg">请填写学生姓名</div>
+            </div>
+
+            <div class="field" id="fPhone">
+              <label>手机号</label>
+              <input id="iPhone" type="tel" maxlength="11" placeholder="用于接收评估结果">
+              <div class="err-msg">请填写正确的 11 位手机号</div>
+            </div>
+
+            <div class="field" id="fGrade">
+              <label>当前年级</label>
+              <div class="chips" id="chips">
+                <div class="chip" data-g="初三">初三</div>
+                <div class="chip" data-g="高一">高一</div>
+                <div class="chip" data-g="高二">高二</div>
+                <div class="chip" data-g="高三">高三</div>
+                <div class="chip" data-g="Gap / 大一">Gap / 大一</div>
+              </div>
+              <div class="err-msg">请选择当前年级</div>
+            </div>
+
+            <div class="agree" id="agree">
+              <div class="check" id="check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+              <p>我已阅读并同意<a onclick="toast('原型示意：隐私政策')">《个人信息处理规则》</a>，同意斯芬克使用该信息与我联系</p>
+            </div>
+
+            <button class="btn btn-primary" id="submit">提交，领取专属爬藤规划</button>
+            <div class="form-note">信息仅用于顾问与你沟通，不会用于其他用途</div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- 悬浮在线客服 -->
+    <button class="cs-btn" id="csBtn">
+      <svg width="20" height="19" viewBox="0 0 20 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M17 9.5c0 3.9-3.6 7-8 7-1 0-2-.15-2.9-.43L2 17.5l1.2-3.2A6.7 6.7 0 0 1 1 9.5C1 5.6 4.6 2.5 9 2.5s8 3.1 8 7z"></path></svg>
+      <span>在线客服</span>
+      <i></i>
+    </button>
+    <nav class="anchors" id="anchors">
+      <button type="button" data-go="secOffer">offer榜</button>
+      <button type="button" data-go="secPath">三大路径</button>
+      <button type="button" data-go="secLogic">申请逻辑</button>
+      <button type="button" data-go="secTl">时间规划</button>
+      <button type="button" data-go="secCases">案例</button>
+      <button type="button" data-go="secAdv">课程提升</button>
+      <button type="button" data-go="secTeam">服务体系</button>
+      <button type="button" data-go="secFaq">常见问题</button>
+    </nav>
+
+    
+
+    <!-- 微信 chrome -->
+    <div class="chrome solid" id="chrome">
+      <div class="statusbar">
+        <div class="t">13:58</div>
+        <div class="i">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="#111"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.6" y="5" width="3" height="6" rx="1"></rect><rect x="9.2" y="2.6" width="3" height="8.4" rx="1"></rect><rect x="13.8" y="0" width="3" height="11" rx="1" opacity=".35"></rect></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#111" stroke-width="1.5"><path d="M1 3.6a10 10 0 0 1 14 0"></path><path d="M3.8 6.4a6.2 6.2 0 0 1 8.4 0"></path><circle cx="8" cy="9.4" r="1.1" fill="#111" stroke="none"></circle></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".7" y=".7" width="20" height="10.6" rx="3" stroke="#111" stroke-opacity=".45"></rect><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#111"></rect><path d="M22.6 4.2v3.6a2 2 0 0 0 0-3.6z" fill="#111" fill-opacity=".45"></path></svg>
+        </div>
+      </div>
+      <div class="navbar">
+        <div class="nav-back" id="back"><i></i></div>
+        <div class="nav-title">艺术爬藤</div>
+        <div class="capsule" id="capsule"><div class="dots"><i></i><i></i><i></i></div><div class="circle"></div></div>
+      </div>
+    </div>
+
+        <div class="divider"></div>
+
+
+    <!-- 底部栏 -->
+    <div class="dock">
+      <div class="dock-tools">
+        <div class="dt" data-t="0">30 秒测评</div>
+        <div class="dt" data-t="1">潜力探索</div>
+        <div class="dt" data-t="2">选校评估</div>
+      </div>
+      <button class="btn btn-primary" data-scroll="#formSec">预约</button>
+    </div>
+
+    <div class="mask" id="srcMask">
+      <div class="modal">
+        <div class="modal-head">
+          <div class="modal-t">艺术爬藤录取生源地榜</div>
+          <div class="modal-x" id="srcClose" style="">✕</div>
+        </div>
+        <div class="seg seg-mini" id="segSrc">
+          <span class="seg-item on" data-r="us">美本</span>
+          <span class="seg-item" data-r="ukhk">英国 · 港新</span>
+        </div>
+        <div class="modal-list" id="srcList"><div class="of-row">
+      <div class="of-left"><span class="of-rank">3</span><span class="of-name">牛津大学</span><span class="badge">G5</span></div>
+      <div class="of-right"><b>4</b><span>枚</span></div>
+    </div><div class="of-row">
+      <div class="of-left"><span class="of-rank">9</span><span class="of-name">伦敦大学学院</span><span class="badge">G5</span></div>
+      <div class="of-right"><b>118</b><span>枚</span></div>
+    </div><div class="of-row">
+      <div class="of-left"><span class="of-rank">27</span><span class="of-name">爱丁堡大学</span><span class="badge">艺术人文强校</span></div>
+      <div class="of-right"><b>136</b><span>枚</span></div>
+    </div></div>
+        <div class="modal-note" id="srcNote">排名口径：QS 世界大学排名，按名次从高到低排列。 生源信息为部分公开样本，其余待补充。</div>
+        <div class="modal-cta">
+          <button class="btn btn-primary" id="srcCta">查我所在城市出过多少录取 ›</button>
+        </div>
+      </div>
+    </div>
+    <div class="pop-join" id="popJoin" hidden>
+      <button class="pop-x" id="popJoinX" type="button" aria-label="关闭">✕</button>
+      <div class="pop-faces">
+        <img src="assets/mentor-2.png" alt="家长">
+        <img src="assets/mentor-4.png" alt="家长">
+        <img src="assets/mentor-5.png" alt="导师">
+      </div>
+      <b>家长群里有人在答</b>
+      <p>进艺术爬藤家长交流群，领资料包，导师在群里答。</p>
+      <button class="btn btn-primary" id="popJoinGo" type="button">进群看看</button>
+    </div>
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const toastEl = $('#toast');
+function toast(t, d){
+  toastEl.textContent = t; toastEl.classList.add('show');
+  clearTimeout(toastEl._t); toastEl._t = setTimeout(()=>toastEl.classList.remove('show'), d||1600);
+}
+
+/* ---------- 路径 ---------- */
+const paths = [
+  {
+    name:'艺术爬藤',
+    lead:'申请综合大学的艺术专业，<em>作品集是主材料</em>。',
+    meta:[['作品集','必交，占审核权重 <em>50% 以上</em>'],['审核方','<em>艺术学院单独审核</em>，名额独立'],['准备周期','建议 <em>12–18 个月</em>']],
+    bullets:['<b>适合：</b>艺术方向清晰，愿意为作品集稳定投入时间','<b>关键：</b>作品要体现完整的思考过程，不只是成品','<b>常见误区：</b>高三才开始，来不及做出有深度的项目']
+  },
+  {
+    name:'艺术特长爬藤',
+    lead:'申请非艺术专业，作品集作为<em>补充材料</em>提交。',
+    meta:[['作品集','<em>选交</em>，提升辨识度、制造记忆点'],['审核方','<em>本科学院统一审核</em>，看整体竞争力'],['准备周期','建议 <em>6–12 个月</em>']],
+    bullets:['<b>适合：</b>学术成绩有竞争力，但缺少一个让人记住的标签','<b>关键：</b>作品要与申请方向有关联，而不是硬塞','<b>加分点：</b>与工程、商科、社科结合的跨学科项目']
+  },
+  {
+    name:'爬艺术藤校',
+    lead:'不走综合排名，直奔<em>全球顶尖艺术学院</em>。',
+    meta:[['作品集','<em>决定性材料</em>，几乎直接决定录取'],['审核方','以<em>作品集评审</em>为主'],['准备周期','建议 <em>18–24 个月</em>']],
+    bullets:['<b>适合：</b>已确定把艺术作为长期职业方向','<b>关键：</b>个人表达与技法同等重要，要有自己的语言']
+  }
+];
+function showCases(k){
+  $$('#caseSeg .seg-item').forEach(t=> t.classList.toggle('on', +t.dataset.k === k));
+  $$('#secCases .case').forEach(c=> { c.hidden = +c.dataset.k !== k; });
+}
+function goCase(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  if(el.dataset.k != null) showCases(+el.dataset.k);
+  const screen = $('#screen');
+  const top = el.getBoundingClientRect().top - screen.getBoundingClientRect().top + screen.scrollTop - 72;
+  screen.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
+  $$('.case.hit').forEach(c=> c.classList.remove('hit'));
+  el.classList.add('hit');
+}
+const pathCases = [
+  ['caseDeng','邓同学 · 康奈尔大学 · 时尚设计','北京一零一中学国际部 · GPA 3.85/4 · 托福109，无SAT'],
+  ['caseFei','费同学 · 康奈尔大学 · 纯艺术','Toronto French School · IB 36/45 · SAT 1440（拼分）'],
+  ['caseFlora','Flora · 卡内基梅隆大学 · 设计','上海中学国际部 · GPA 3.64/4 · 托福109 · SAT1470'],
+  ['caseHuang','黄祎含 · 牛津大学 · 纯艺','斯芬克国际艺术高中 · GPA 4.2/5 · 雅思7.0']
+];
+const talentCases = [
+  ['caseYale','某同学 · 耶鲁大学 · 机械工程','机械工程等非艺术专业，作品集作为补充材料'],
+  ['caseCornellMe','某同学 · 康奈尔大学 · 机械工程','机械工程，作品集作为补充材料'],
+  ['caseStanford','某同学 · 斯坦福大学 · 工程','工程专业，作品集作为补充材料'],
+  ['casePenn','某同学 · 宾夕法尼亚大学 · 设计 / 人类学','设计 / 人类学，作品集作为补充材料']
+];
+const schoolCases = [
+  ['casePan','潘同学 · 布朗大学 + 罗德岛设计学院双学位','服装设计方向 · 全A · SAT 1500+ · 藤校夏校 · 国家级艺术竞赛金奖']
+];
+function renderPath(i){
+  const p = paths[i];
+  const list = [pathCases, talentCases, schoolCases][i] || [];
+  const reps = `<div class="reps"><span class="rep-k">代表性案例</span>${list.map(c=>`<button type="button" class="rep" data-case="${c[0]}"><b>${c[1]}</b><span class="rep-s">${c[2]}</span></button>`).join('')}</div>`;
+  $('#pathBox').innerHTML = `<div class="path">
+    <p class="lead">${p.lead}</p>
+    <div class="meta">
+      ${p.meta.map(m=>`<div class="meta-row"><dt>${m[0]}</dt><dd>${m[1]}</dd></div>`).join('')}
+    </div>
+    <div class="bullets">${p.bullets.map(b=>`<div class="bullet"><i>✓</i><div>${b}</div></div>`).join('')}</div>
+    ${reps}
+  </div>`;
+  $$('#pathBox .rep').forEach(b=> { if(b.dataset.case) b.onclick = ()=> goCase(b.dataset.case); });
+}
+function selectPath(i){
+  $$('#pathRail .rail-card').forEach(x=> x.classList.toggle('on', +x.dataset.p === i));
+  renderPath(i);
+  showCases(i);
+}
+$$('#pathRail .rail-card').forEach(it=> it.onclick = ()=> selectPath(+it.dataset.p));
+$$('#caseSeg .seg-item').forEach(t=> t.onclick = ()=> selectPath(+t.dataset.k));
+renderPath(2);
+showCases(2);
+
+/* ---------- 时间轴 ---------- */
+/* ---------- 时间轴（6-8 年级为第一档） ---------- */
+const explorePoints = [
+  ['好奇心最旺','新材料、新画法都想试，教什么上手都快。'],
+  ['试错成本低','没有申请压力，画坏了推倒重来，不心疼。'],
+  ['感受力强','色彩、声音、故事，这个阶段吸收得最快。'],
+  ['习惯能扎根','速写、观察笔记天天做一点，攒下来就是作品集的家底。']
+];
+const timelines = [
+  {
+    stage:'6–8 年级 · 探索窗口', tip:'先把兴趣试出来，再决定走哪条路',
+    chart:true
+  },
+  {
+    stage:'9 年级 · 基础期', tip:'重点：判断要不要走，并开始基础课',
+    nodes:[
+      ['上学期','判断适不适合','用成绩、兴趣、英语看孩子能不能走艺术这条路'],
+      ['全年','基础课起步','素描、构成从零开始，重点看孩子坐不坐得住'],
+      ['下学期','文化课不停','转轨不等于放掉 GPA，文化课主线照走']
+    ]
+  },
+  {
+    stage:'10 年级 · 起步期', tip:'重点：切到双线，做出第一个项目',
+    nodes:[
+      ['上学期','切成学术＋艺术','三条路径里定一条，从纯学术切到双线一起走'],
+      ['全年','做完第一个项目','选题对零基础友好，先走完一个完整项目'],
+      ['全年','活动收到主线上','砍掉和艺术无关的旧活动，新活动都围绕艺术'],
+      ['下学期','托福先考一次','首考用来摸底，给二刷留出时间']
+    ]
+  },
+  {
+    stage:'11 年级 · 关键期', tip:'重点：作品集做到大半，分数和选校一起定',
+    nodes:[
+      ['全年','作品集做到 60–70%','项目量完成大半，每月评审一次，盯质量'],
+      ['上学期','标化拿到目标分','托福 / SAT 在这一年出分，不拖到 12 年级'],
+      ['下学期','定出三档学校','按作品集档位和成绩，分成冲刺、匹配、保底']
+    ]
+  },
+  {
+    stage:'12 年级 · 冲刺期', tip:'重点：出终稿，按时递交',
+    nodes:[
+      ['上学期','出可以提交的终稿','补拍、排版，按各校要求出提交版，并留出返工时间'],
+      ['11 月','递交 ED / EA','早申轮截止，有的学校还要作品集讲解面试'],
+      ['次年 1 月','递交 RD','常规轮截止，文书和作品集讲的是同一件事']
+    ]
+  }
+];
+function stairBody(t){
+  if(t.chart){
+    return `<img class="explore-chart" src="assets/explore-curve.png" alt="学业压力与认知能力曲线">
+      <div class="explore-grid">
+        ${explorePoints.map(p=>`<div class="exp"><div class="exp-name">${p[0]}</div><div class="exp-desc">${p[1]}</div></div>`).join('')}
+      </div>
+      <div class="works">
+        <div class="works-t">探索课真实产出 · 6–8 年级学生作品</div>
+        <div class="works-row">
+          <img class="works-main" src="assets/student-work-journal.jpg" alt="学生动物观察手账拼贴作品">
+          <img class="works-side" src="assets/student-work-installation.jpg" alt="学生昆虫创意装置作品">
+        </div>
+        <div class="works-cap">左：动物观察手账与拼贴（观察力 × 叙事）；右：昆虫主题创意装置（材料 × 表达）。均为斯芬克 6–8 年级探索课学员作品。</div>
+      </div>`;
+  }
+  return t.nodes.map(n=>`<div class="task"><div><b><em>${n[0]}</em>${n[1]}</b><span>${n[2]}</span></div><i>✓</i></div>`).join('');
+}
+function planTasks(indexes){
+  return indexes.map(i=>{
+    const t = timelines[i];
+    const parts = t.stage.split('·').map(s=>s.trim());
+    return `<div class="fnode"><div class="fnode-h">${parts[0]}<span>${parts[1]||''}</span></div>` +
+      t.nodes.map(n=>`<div class="fstep"><em>${n[0]}</em>${n[1]}</div>`).join('') +
+      `</div>`;
+  }).join('');
+}
+const gradePlans = [
+  { k:'艺藤Junior', name:'低龄艺术探索', sub:'6–8 年级', chart:true },
+  { k:'长线规划', name:'9–12 年级', sub:'从基础到递交', indexes:[1,2,3,4] },
+  { k:'短期规划', name:'11–12 年级', sub:'作品集做到大半再递交', indexes:[3,4] }
+];
+function renderDims(open){
+  const p = gradePlans[open];
+  const body = open < 0 ? '' : (p.chart ? stairBody({chart:true}) : '<div class="flowline">' + planTasks(p.indexes) + '</div>');
+  $('#dims').innerHTML = `<div class="dim-row">` + gradePlans.map((item,i)=>`<div class="dim${i===open?' on':''}" data-i="${i}">
+      <button type="button" class="dim-step">
+        <span class="dim-k">${item.k}</span>
+        <b>${item.name}</b>
+        <span>${item.sub}</span>
+      </button>
+    </div>`).join('') + `</div>` + (body ? `<div class="dim-panel">${body}</div>` : '');
+  $$('#dims .dim-step').forEach(btn=> btn.onclick = ()=>{
+    const i = +btn.parentElement.dataset.i;
+    renderDims(i === open ? -1 : i);
+  });
+}
+renderDims(0);
+
+/* ---------- offer ---------- */
+/* Offer 榜：统一 [排名, 校名, 徽章, 枚数]，按名次升序 */
+const offers = {
+  us:[
+    ['1','普林斯顿大学','藤校',1],['2','麻省理工学院','大藤',1],['4','斯坦福大学','大藤',1],['5','耶鲁大学','藤校',2],
+    ['文理学院','威廉姆斯学院','',1],
+    ['6','约翰霍普金斯大学','',42],['6','西北大学','',4],['10','宾夕法尼亚大学','藤校',5],
+    ['11','芝加哥大学','',1],['11','康奈尔大学','藤校',28],['13','布朗大学','藤校',2],['13','哥伦比亚大学','藤校',1],
+    ['文理学院','史密斯学院','',1],
+    ['15','达特茅斯学院','藤校',2],['15','加州大学洛杉矶分校','',23],['17','加州大学伯克利分校','',24],
+    ['21','卡内基梅隆大学','',21],['21','密歇根大学安娜堡分校','',15],['21','圣路易斯华盛顿大学','',13],
+    ['24','弗吉尼亚大学','',8],['27','南加州大学','',111],['27','北卡罗来纳大学教堂山分校','',5],
+    ['29','加州大学圣地亚哥分校','',41],['30','纽约大学','',135],['37','塔夫茨大学','',10]
+  ],
+  ukhk:[
+    ['2','帝国理工学院','G5',3],['3','牛津大学','G5',13],['5','剑桥大学','G5',20],
+    ['8','新加坡国立大学','新加坡',4],['9','伦敦大学学院','G5',223],['15','南洋理工大学','新加坡',4],
+    ['17','香港大学','港前三',64],['36','香港中文大学','港前三',4],['47','香港科技大学','港前三',10]
+  ]
+};
+const offerRankNote = {
+  us:'排名口径：US News 全美大学排名，按名次从高到低排列。同一所学校的专业录取与特长录取已合并。威廉姆斯学院、史密斯学院是文理学院，按申请档次排入，不放在名单末尾。',
+  ukhk:'排名口径：QS 世界大学排名。英国、中国香港、新加坡按名次从高到低排在一起。'
+};
+let offerRegion = 'us';
+function renderOffer(){
+  $('#offerBox').innerHTML = offers[offerRegion].map(o=>`<div class="offer-row">
+      <div class="offer-line"><div class="offer-left"><span class="offer-rank">${o[0]}</span><span class="offer-name">${o[1]}</span>${o[2]?`<span class="badge">${o[2]}</span>`:''}</div>
+      <div class="offer-right"><b>${o[3]}</b><span>枚</span></div></div>
+    </div>`).join('');
+  $('#offerNote').textContent = offerRankNote[offerRegion];
+}
+function closeSrc(){ $('#srcMask').classList.remove('show'); }
+(function(){
+  const all = [].concat(offers.us, offers.ukhk);
+  const num = $('#tallyNum');
+  if (num) num.textContent = all.reduce((s,o)=> s + o[3], 0);
+  const board = $('#tallyBoard');
+  if (!board) return;
+  const ivy = offers.us.filter(o=> o[2] === '藤校' || o[2] === '大藤');
+  const short = n => n.replace(/大学$/,'').replace(/学院$/,'');
+  board.innerHTML = ivy.map(o=>
+    `<div class="tb-row"><span class="tb-rank">#${o[0]}</span><span class="tb-name">${short(o[1])}</span><span class="tb-num"><b>${o[3]}</b><span>枚</span></span></div>`
+  ).join('');
+})();
+
+/* ---------- 生源地榜单弹窗：城市筛选 + 每枚 offer 标注生源高中 ---------- */
+/* 生源样本待业务补充：offerSrc 里没有的学校不显示生源行 */
+const offerSrc = {
+  '耶鲁大学': { city: '北京', school: '北京一梯队公立国际部' },
+  '卡内基梅隆大学': { city: '上海', school: '上海某中学国际部' }
+};
+renderOffer();
+let srcRegion = 'us';
+function renderSrc(){
+  const list = offers[srcRegion];
+  $('#srcList').innerHTML = (list.length ? list.map(o=>{
+    const s = offerSrc[o[1]];
+    return `<div class="of-row">
+      <div class="of-left"><span class="of-rank">${o[0]}</span><span class="of-name">${o[1]}</span>${o[2] ? `<span class="badge">${o[2]}</span>` : ''}</div>
+      <div class="of-right"><b>${o[3]}</b><span>枚</span></div>
+    </div>` + (s ? `<div class="of-src">生源：${s.school}</div>` : '');
+  }).join('') : '<div class="of-empty">暂无已公开的录取样本。<br>可留信息，让顾问帮你查同城案例。</div>');
+  $('#srcNote').textContent = offerRankNote[srcRegion] + ' 生源信息为部分公开样本，其余待补充。';
+  $$('#segSrc .seg-item').forEach(t=> t.classList.toggle('on', t.dataset.r === srcRegion));
+}
+renderSrc();
+
+function openSrc(){ renderSrc(); $('#srcMask').classList.add('show'); }
+$$('#segSrc .seg-item').forEach(t=> t.onclick = ()=>{ srcRegion = t.dataset.r; renderSrc(); });
+$('#srcClose').onclick = ()=> closeSrc();
+$('#srcMask').onclick = e=>{ if (e.target.id === 'srcMask') closeSrc(); };
+$('#srcCta').onclick = ()=>{
+  closeSrc();
+  const el = $('#formSec');
+  $('#screen').scrollTo({ top: el.offsetTop - 60, behavior:'smooth' });
+};
+$$('#segOffer .seg-item').forEach(it=> it.onclick = ()=>{
+  $$('#segOffer .seg-item').forEach(x=>x.classList.remove('on'));
+  it.classList.add('on'); offerRegion = it.dataset.o; renderOffer();
+});
+
+/* ---------- 交互 ---------- */
+$$('[data-scroll]').forEach(b=> b.onclick = ()=>{
+  const el = $(b.dataset.scroll);
+  $('#screen').scrollTo({ top: el.offsetTop - 60, behavior:'smooth' });
+});
+$('#back').onclick = ()=> toast('返回上一页（原型示意）');
+$('#capsule').onclick = ()=> toast('打开小程序菜单（原型示意）');
+$$('.mentor').forEach(m=> m.onclick = ()=> toast(m.dataset.rol || m.dataset.role || m.querySelector('.m-name').textContent + '：可在评估时指定对接'));
+
+/* ---------- 常见问题 ---------- */
+const faqs = [
+  {
+    q:'艺术爬藤到底值不值得投入？投入作品集，能不能换来差异化竞争力？',
+    a:[
+      ['值不值，看它换来什么。','同样 GPA 3.7，只拼分数是「第几百个 3.7」；加作品集是「那个做 XX 项目的学生」。'],
+      ['它是少数你能主动塑造的材料。','分数和竞赛靠天赋与运气，作品集靠规划和投入，结果更可控。'],
+      ['投入量按路径来。','艺术爬藤最依赖作品集，艺术特长爬藤中等投入就能制造记忆点，不用一上来就全力投入。']
+    ]
+  },
+  {
+    q:'孩子之前没怎么接触艺术，怎么验证他适不适合、做兴趣探索？',
+    a:[
+      ['先上一节艺术课堂体验。','看的是投入度和反馈，不是画得好不好——愿意继续做下去才有戏。'],
+      ['再做一个小项目（2–4 周）。','观察能否独立完成从选题、调研到成品的完整过程。'],
+      ['最后按作品集标准评估。','是缺技法还是缺兴趣：技法能补，兴趣补不了，后者不建议转轨。']
+    ]
+  },
+  {
+    q:'AP、A-Level 等艺术类国际课程，怎么一边提升艺术能力、一边拉高成绩单？',
+    a:[
+      ['艺术课成绩本身就是成绩单的一部分。','AP / A-Level Art &amp; Design 的学分计入 GPA，不是「课外活动」。'],
+      ['课程作业可以复用成作品集项目。','一份投入两处产出，不必分两套体系准备。'],
+      ['选课前先确认学分是否被认可。','按目标院校要求选课，避免学了不计分或课程难度不匹配。']
+    ]
+  },
+  {
+    q:'英美港新多地区同时申请，时间轴怎么规划更合理？',
+    a:[
+      ['按最早截止的地区倒推主线。','牛津剑桥 10 月中，美本 ED 11 月，港校 11 月–次年 1 月，美本 RD 1 月，新加坡 2–3 月。'],
+      ['作品集在 11 年级暑期前完成 80%。','之后只做地区差异化调整：英国更看调研过程，美本更看个人表达。'],
+      ['文书分地区写，主线必须一致。','各地区侧重可以不同，但「你是谁」这条主线不能分裂。']
+    ]
+  }
+];
+$('#qaBox').innerHTML = faqs.map((f,i)=>`<div class="qa" data-i="${i}">
+  <div class="qa-q"><span class="qa-no">Q${i+1}</span><div class="qa-title">${f.q}</div><div class="qa-arrow"></div></div>
+  <div class="qa-a">${f.a.map(x=>`<div class="qa-li"><b>${x[0]}</b>${x[1]}</div>`).join('')}</div>
+</div>`).join('');
+$$('#qaBox .qa-q').forEach(h=> h.onclick = ()=> h.parentElement.classList.toggle('on'));
+$$('#secCases .case-detail').forEach(function (detail) {
+  var btn = document.createElement('div');
+  btn.className = 'case-more';
+  btn.textContent = '展开活动和奖项';
+  detail.after(btn);
+  btn.onclick = function () {
+    var c = btn.closest('.case');
+    c.classList.toggle('open');
+    btn.textContent = c.classList.contains('open') ? '收起' : '展开活动和奖项';
+  };
+});
+
+/* ---------- 测评工具 ---------- */
+const toolNames = ['艺术爬藤测评','艺术潜力探索','艺术选校评估'];
+const submitText = ['提交，领取专属爬藤规划','提交，预约艺术课堂体验','提交，领取完整选校清单'];
+function scrollToForm(){
+  $('#screen').scrollTo({ top: $('#formSec').offsetTop - 60, behavior:'smooth' });
+}
+function setIntent(i){
+  const el = $('#formIntent');
+  el.hidden = false;
+  el.innerHTML = '已选工具：<b>' + toolNames[i] + '</b>';
+  $('#submit').textContent = submitText[i];
+}
+/* 对号入座：点击跳到对应路径 / 测评 / 表单 */
+function goToFit(d){
+  const scrollTo = sel => $('#screen').scrollTo({ top: $(sel).offsetTop - 60, behavior:'smooth' });
+  if(d.t === 'tools' || d.t === 'quiz'){ setIntent(0); scrollTo('#formSec'); return; }
+  if(d.t === 'explore'){ setIntent(1); scrollTo('#formSec'); return; }
+  if(d.t === 'adv'){ scrollTo('#secAdv'); return; }
+  if(d.t === 'logic'){ scrollTo('#secLogic'); return; }
+  if(d.t === 'form'){ scrollTo('#formSec'); return; }
+  if(d.p === undefined) return;
+  const i = +d.p;
+  selectPath(i);
+  scrollTo('#secPath');
+}
+$$('#secPath .path-else button').forEach(f=> f.onclick = ()=> goToFit(f.dataset));
+$$('#secBrand .bp').forEach(f=> f.onclick = ()=> goToFit(f.dataset));
+
+$$('.tool').forEach(t=> t.onclick = ()=>{
+  const i = +t.dataset.t;
+  if(i === 2){
+    const p = $('#picker');
+    p.hidden = !p.hidden;
+    if(!p.hidden){
+      p.scrollIntoView({ block:'center', behavior:'smooth' });
+    } else {
+      $('#pickResult').innerHTML = '';
+    }
+    return;
+  }
+  setIntent(i); scrollToForm();
+});
+
+/* 选校工具 */
+const pickVal = {};
+$$('.picker-chips').forEach(g=>{
+  const key = g.dataset.pk;
+  $$1(g,'.p-chip').forEach(c=> c.onclick = ()=>{
+    $$1(g,'.p-chip').forEach(x=> x.classList.remove('on'));
+    c.classList.add('on'); pickVal[key] = c.dataset.v;
+  });
+});
+function $$1(root, sel){ return Array.from(root.querySelectorAll(sel)); }
+
+const schoolTable = {
+  us:[
+    ['康奈尔 · 卡内基梅隆','纽约大学 · 南加州大学','宾州州立 · 俄亥俄州立'],
+    ['纽约大学 · 南加州大学','莱斯 · 加大洛杉矶','宾州州立 · 雪城'],
+    ['加大圣地亚哥 · 伊利诺伊香槟','宾州州立 · 俄亥俄州立','普渡 · 罗格斯'],
+    ['俄亥俄州立 · 宾州州立','雪城 · 普渡','印第安纳 · 罗格斯']
+  ],
+  uk:[
+    ['牛津 · 剑桥','伦敦大学学院 · 爱丁堡','曼彻斯特 · 格拉斯哥'],
+    ['伦敦大学学院 · 爱丁堡','曼彻斯特 · 布里斯托','利兹 · 谢菲尔德'],
+    ['曼彻斯特 · 布里斯托','利兹 · 伯明翰','利物浦 · 卡迪夫'],
+    ['利兹 · 伯明翰','利物浦 · 卡迪夫','威斯敏斯特 · 金斯顿']
+  ],
+  hk:[
+    ['香港大学 · 香港中文大学','香港科技大学 · 香港城市大学','香港理工大学 · 香港浸会大学'],
+    ['香港科技大学 · 香港城市大学','香港理工大学 · 香港浸会大学','岭南大学 · 香港教育大学'],
+    ['香港理工大学 · 香港浸会大学','岭南大学 · 香港教育大学','香港都会大学 · 香港恒生大学'],
+    ['香港浸会大学 · 岭南大学','香港都会大学 · 香港恒生大学','香港树仁大学 · 香港珠海学院']
+  ]
+};
+const regionName = { us:'美本', uk:'英国', hk:'中国香港' };
+
+$('#pickBtn').onclick = ()=>{
+  if(pickVal.gpa === undefined || pickVal.folio === undefined || pickVal.region === undefined){
+    toast('请先完成上面三项选择'); return;
+  }
+  // 成绩档 + 作品集情况：有作品集上抬一档，没开始下调一档
+  let lv = +pickVal.gpa + (+pickVal.folio === 0 ? 1 : +pickVal.folio === 2 ? -1 : 0);
+  lv = Math.max(0, Math.min(3, lv));
+  const s = schoolTable[pickVal.region][lv];
+  $('#pickResult').innerHTML = `<div class="result">
+    <div class="res-title">你的选校定位 · ${regionName[pickVal.region]}</div>
+    <div class="res-row"><dt>冲刺</dt><dd>${s[0]}</dd></div>
+    <div class="res-row"><dt>匹配</dt><dd>${s[1]}</dd></div>
+    <div class="res-row"><dt>保底</dt><dd>${s[2]}</dd></div>
+    <div class="res-note">同样的成绩不加作品集，整体约低一档。以上为同档背景的常见区间，个体结果因材料而异。</div>
+    <button class="btn btn-primary" id="pickMore">拿一份完整选校清单</button>
+  </div>`;
+  $('#pickMore').onclick = ()=>{ setIntent(2); scrollToForm(); };
+};
+
+/* ---------- 表单 ---------- */
+let grade='', agreed=false;
+$$('#chips .chip').forEach(c=> c.onclick = ()=>{
+  $$('#chips .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on'); grade = c.dataset.g; $('#fGrade').classList.remove('err');
+});
+$('#agree').onclick = ()=>{ agreed = !agreed; $('#check').classList.toggle('on', agreed); };
+$('#iName').addEventListener('input', ()=> $('#fName').classList.remove('err'));
+$('#iPhone').addEventListener('input', e=>{ e.target.value = e.target.value.replace(/\D/g,'').slice(0,11); $('#fPhone').classList.remove('err'); });
+
+$('#submit').onclick = ()=>{
+  const name = $('#iName').value.trim(), phone = $('#iPhone').value.trim();
+  let first = null;
+  if(!name){ $('#fName').classList.add('err'); first = first || $('#fName'); }
+  if(!/^1\d{10}$/.test(phone)){ $('#fPhone').classList.add('err'); first = first || $('#fPhone'); }
+  if(!grade){ $('#fGrade').classList.add('err'); first = first || $('#fGrade'); }
+  if(!agreed){ toast('请先勾选同意个人信息处理规则'); }
+  if(first || !agreed){ if(first) first.scrollIntoView({block:'center',behavior:'smooth'}); return; }
+
+  const btn = $('#submit');
+  btn.textContent = '提交中…'; btn.style.opacity = '.7'; btn.disabled = true;
+  setTimeout(()=>{
+    $('#formCard').innerHTML = `<div class="done">
+      <div class="tick"><svg width="24" height="18" viewBox="0 0 24 18" fill="none"><path d="M2 9.5l6.5 6.5L22 2" stroke="#CE3D6E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>已提交，顾问会尽快联系你</h3>
+      <p>路径手册已发送至你的手机<br>建议先对照手册里的自测表，再和评估沟通</p>
+      <div class="advisor">
+        <img src="assets/mentor-2.png" alt="顾问">
+        <div><b>王老师 · 升学顾问</b><span>8 年艺术留学规划经验</span></div>
+        <span class="on">在线</span>
+      </div>
+      <button class="btn btn-primary" onclick="toast('正在唤起微信客服（原型示意）')">添加顾问微信，先聊 5 分钟</button>
+      <button class="btn btn-plain" onclick="toast('原型示意：返回继续浏览')">先继续看看页面</button>
+    </div>`;
+  }, 800);
+};
+
+function selectTool(i){
+  if(i === 2){
+    const p = $('#picker');
+    const box = $('#secTools');
+    box.hidden = false;
+    p.hidden = false;
+    $('#screen').scrollTo({ top: box.offsetTop - 70, behavior:'smooth' });
+    return;
+  }
+  setIntent(i); scrollToForm();
+}
+
+$$('.dock .dt').forEach(el=> el.onclick = ()=> selectTool(+el.dataset.t));
+
+/* ---------- 社群 + 在线客服 ---------- */
+$('#joinComm').onclick = ()=>{
+  $('#formIntent').hidden = false;
+  $('#formIntent').innerHTML = '已选：<b>加入爬藤家长社群</b>';
+  $('#submit').textContent = '提交，进群领取资料包';
+  scrollToForm();
+};
+$('#openChat').onclick = ()=> toast('正在接入在线客服（原型示意）');
+$('#csBtn').onclick = ()=> toast('正在接入在线客服（原型示意）');
+
+let popStopped = false;
+let popTimer = 0;
+function hideJoinPop(){
+  const el = $('#popJoin');
+  el.classList.remove('show');
+  setTimeout(()=>{ if(!el.classList.contains('show')) el.hidden = true; }, 260);
+}
+function showJoinPop(){
+  if(popStopped) return;
+  const el = $('#popJoin');
+  el.hidden = false;
+  requestAnimationFrame(()=> el.classList.add('show'));
+}
+function scheduleJoinPop(delay){
+  if(popStopped) return;
+  clearTimeout(popTimer);
+  popTimer = setTimeout(()=>{
+    showJoinPop();
+    popTimer = setTimeout(()=>{ hideJoinPop(); scheduleJoinPop(24000); }, 7000);
+  }, delay);
+}
+$('#popJoinX').onclick = ()=>{ popStopped = true; clearTimeout(popTimer); hideJoinPop(); };
+$('#popJoinGo').onclick = ()=>{ popStopped = true; clearTimeout(popTimer); hideJoinPop(); $('#joinComm').click(); };
+scheduleJoinPop(8000);
+
+/* ---------- chrome ---------- */
+$('#screen').addEventListener('scroll', ()=>{
+  $('#chrome').classList.toggle('solid', $('#screen').scrollTop > 10);
+  var y = $('#screen').scrollTop + 120;
+  var groups = [
+    ['secOffer','offer榜'],
+    ['secPath','三大路径'],['secLogic','申请逻辑'],['secTl','时间规划'],
+    ['secCases','案例'],
+    ['secAdv','课程提升'],['secTeam','服务体系'],
+    ['secFaq','常见问题']
+  ];
+  var cur = '';
+  groups.forEach(function (g) {
+    var el = document.getElementById(g[0]);
+    if (el && el.offsetTop <= y) cur = g[1];
+  });
+  $$('#anchors button').forEach(function (b) { b.classList.toggle('on', b.textContent === cur); });
+});
+$$('#anchors button').forEach(function (b) {
+  b.onclick = function () {
+    var el = document.getElementById(b.dataset.go);
+    $('#screen').scrollTo({ top: el.offsetTop - 72, behavior:'smooth' });
+  };
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
