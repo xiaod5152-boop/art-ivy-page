@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>艺术爬藤 · 小程序原型图</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #F3F4FB;
+    color: #1A1A1A;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  header {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 8px;
+  }
+  header p {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    color: #4338CA;
+  }
+  header h1 { margin: 0; font-size: 32px; line-height: 1.2; }
+  header span {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #6B7280;
+  }
+  .flow { max-width: 760px; margin: 0 auto; padding: 28px 24px 64px; }
+  .shot {
+    display: grid;
+    grid-template-columns: 180px 390px;
+    gap: 28px;
+    align-items: start;
+    margin: 0 0 56px;
+  }
+  .label { padding-top: 8px; }
+  .label b {
+    display: block;
+    font-size: 13px;
+    letter-spacing: .08em;
+    color: #4338CA;
+  }
+  .label strong {
+    display: block;
+    margin: 6px 0 8px;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .label span { display: block; font-size: 13px; line-height: 1.6; color: #6B7280; }
+  .label a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #1C1418;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .device {
+    width: 390px;
+    height: 780px;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #140E12;
+    box-shadow: 0 16px 40px rgba(28, 20, 24, .12);
+  }
+  iframe {
+    width: 390px;
+    height: 844px;
+    border: 0;
+    transform: scale(.9242);
+    transform-origin: top left;
+    display: block;
+  }
+  @media (max-width: 720px) {
+    .shot { grid-template-columns: 1fr; gap: 12px; }
+    .device, iframe { width: 100%; }
+    .device { height: auto; aspect-ratio: 390 / 780; }
+    iframe { width: 390px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <p>SFENKE · 小程序专题</p>
+  <h1>艺术爬藤原型图</h1>
+  <span>四问进去，数据、课程对照和时间轴是出口。点「打开」进入可点击的页面。</span>
+</header>
+<div class="flow">
+  <article class="shot">
+    <div class="label"><b>01</b><strong>四问</strong><span>每个问题展开后有一个动作出口。</span><a href="index.html#ask" target="_blank">打开</a></div>
+    <div class="device"><iframe src="index.html?v=43&embed=1#ask" title="四问"></iframe></div>
+  </article>
+  <article class="shot">
+    <div class="label"><b>02</b><strong>三件事</strong><span>决策、学术、能力。家长看的是带走什么。</span><a href="index.html#decide" target="_blank">打开</a></div>
+    <div class="device"><iframe src="index.html?v=43&embed=1#decide" title="三件事"></iframe></div>
+  </article>
+  <article class="shot">
+    <div class="label"><b>03</b><strong>数字见证</strong><span>同一所学校，两种录取概率。</span><a href="index.html#proof" target="_blank">打开</a></div>
+    <div class="device"><iframe src="index.html?v=43&embed=1#proof" title="数字见证"></iframe></div>
+  </article>
+  <article class="shot">
+    <div class="label"><b>04</b><strong>学员故事</strong><span>横滑三张卡，完整规划在浮层里。</span><a href="index.html#stories" target="_blank">打开</a></div>
+    <div class="device"><iframe src="index.html?v=43&embed=1#stories" title="学员故事"></iframe></div>
+  </article>
+  <article class="shot">
+    <div class="label"><b>05</b><strong>时间轴</strong><span>按年级看必须完成、失误和补救窗口。</span><a href="index.html#timeline" target="_blank">打开</a></div>
+    <div class="device"><iframe src="index.html?v=43&embed=1#timeline" title="时间轴"></iframe></div>
+  </article>
+  <article class="shot">
+    <div class="label"><b>06</b><strong>行动清单</strong><span>领取清单并预约 1v1 评估。</span><a href="index.html#close" target="_blank">打开</a></div>
+    <div class="device"><iframe src="index.html?v=43&embed=1#close" title="行动清单"></iframe></div>
+  </article>
+</div>
+</body>
+</html>
