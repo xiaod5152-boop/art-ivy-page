@@ -86,26 +86,26 @@ body{
 .hero h1 em{font-style:normal;color:var(--brand)}
 .hero p{font-size:13.5px;line-height:1.75;color:var(--ink-2);margin-bottom:14px}
 /* 首屏证据面板：同一份成绩 → 两个结果（营销主视觉） */
-.proof{background:var(--brand-soft);border-radius:14px;padding:12px;margin-bottom:12px}
+.proof{background:var(--brand-soft);border-radius:14px;padding:10px 12px 8px;margin-bottom:12px}
 .hero .proof{margin:14px 0 0}
-.proof-head{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:12px;font-size:11.5px;color:var(--ink-2)}
+.proof-head{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-bottom:8px;font-size:11.5px;color:var(--ink-2)}
 .proof-head b{color:var(--ink);font-weight:600;font-size:13px}
-.proof-cmp{position:relative;display:flex;gap:10px}
-.pc-cell{flex:1;min-width:0;background:#fff;border-radius:10px;padding:10px}
+.proof-cmp{position:relative;display:flex;gap:8px;align-items:stretch}
+.pc-cell{flex:1;min-width:0;background:#fff;border-radius:10px;padding:8px 8px 7px}
 .pc-cell.hi{border:1.5px solid var(--brand);position:relative}
-.pc-tag{display:inline-block;font-size:10.5px;font-weight:500;border-radius:4px;padding:2px 6px;margin-bottom:8px}
+.pc-tag{display:inline-block;font-size:10.5px;font-weight:500;border-radius:4px;padding:1px 6px;margin-bottom:5px}
 .pc-cell.plain .pc-tag{color:var(--ink-3);background:#F3F3F3}
 .pc-cell.hi .pc-tag{color:var(--brand);background:rgba(206,61,110,.12)}
-.pc-rank{display:flex;align-items:baseline;gap:4px;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1;white-space:nowrap}
+.pc-rank{display:flex;align-items:baseline;gap:6px;font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1;white-space:nowrap}
 .pc-rank small{font-size:11px;font-weight:500;color:var(--ink-3)}
 .pc-cell.hi .pc-rank{color:var(--brand)}
-.pc-delta{flex:none;font-size:10px;font-weight:700;color:#fff;background:var(--brand);border-radius:99px;padding:2px 6px}
-.pc-schools{margin-top:4px;font-size:11.5px;line-height:1.5;color:var(--ink-2)}
+.pc-delta{flex:none;font-size:10px;font-weight:700;color:#fff;background:var(--brand);border-radius:99px;padding:1px 5px}
+.pc-schools{margin-top:4px;font-size:11.5px;line-height:1.35;color:var(--ink-2)}
 .pc-cell.hi .pc-schools{color:var(--brand);font-weight:600}
-.pc-extra{margin-top:6px;padding-top:6px;border-top:1px dashed rgba(206,61,110,.3);font-size:11px;color:var(--brand)}
+.pc-extra{margin-top:5px;padding-top:4px;border-top:1px dashed rgba(206,61,110,.3);font-size:11px;line-height:1.35;color:var(--brand)}
 .pc-extra-plain{border-top-color:#E8E8E8;color:var(--ink-3)}
-.pc-mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:30px;height:30px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(206,61,110,.35)}
-.proof-foot{margin-top:10px;font-size:10.5px;color:var(--ink-3);line-height:1.5}
+.pc-mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:26px;height:26px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(206,61,110,.35)}
+.proof-foot{margin-top:6px;font-size:10.5px;color:var(--ink-3);line-height:1.35}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;height:46px;border-radius:8px;font-size:15px;font-weight:600;border:none;font-family:var(--sans);cursor:pointer;transition:transform .15s ease-out,opacity .15s}
 .btn:active{transform:scale(.985)}
 .btn-primary{background:var(--brand);color:#fff}
@@ -131,10 +131,15 @@ body{
 .pain-foot b{color:var(--ink);font-weight:700}
 .pain-go{display:block;margin-top:4px;font-size:11px;font-weight:600;color:var(--brand)}
 .path-rail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:0 0 12px}
-.rail-card{min-width:0;height:118px;box-sizing:border-box;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 8px 9px;cursor:pointer;font-family:var(--sans);overflow:hidden}
-.rail-card .sit{display:block;height:4.2em;overflow:hidden;font-size:12px;font-weight:600;line-height:1.4;color:var(--ink)}
-.rail-card .pname{display:block;height:2.7em;margin-top:6px;overflow:hidden;font-size:11px;font-weight:700;line-height:1.35;color:var(--brand)}
+.rail-card{display:flex;flex-direction:column;align-items:center;min-width:0;box-sizing:border-box;text-align:center;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 6px 10px;cursor:pointer;font-family:var(--sans)}
+.rail-card .pname{display:flex;flex-direction:column;align-items:center;gap:4px}
+.rail-card .pname b{font-size:14px;font-weight:700;line-height:1.3;color:var(--ink)}
+.rail-card .pname i{font-style:normal;font-size:10px;font-weight:600;line-height:1.4;color:var(--ink-2)}
 .rail-card.on{background:var(--brand-soft);border-color:rgba(206,61,110,.45)}
+.rail-card.on .pname b{color:var(--brand)}
+.path-sit{margin-bottom:6px;font-size:11px;font-weight:500;line-height:1.5;color:var(--ink-2);white-space:nowrap}
+.path-sit b{font-weight:700;color:var(--ink)}
+.path-go{margin-bottom:10px;font-size:11px;font-weight:700;line-height:1.5;color:var(--brand);white-space:nowrap}
 .path-else{margin-top:12px;border-top:1px solid var(--line)}
 .path-else button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:11px 0;font-family:var(--sans);cursor:pointer}
 .path-else button:last-child{border-bottom:0}
@@ -233,11 +238,13 @@ body{
 
 /* ============ 02b 6-8 年级艺术探索 ============ */
 .explore{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px}
-.explore-chart{display:block;width:100%;border-radius:8px;background:#fff;border:1px solid #F5F5F5}
-.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.exp{border:1px solid var(--line);border-radius:10px;padding:12px}
-.exp-name{font-size:13px;font-weight:600;margin-bottom:3px}
-.exp-desc{font-size:11px;color:var(--ink-2);line-height:1.6}
+.explore-chart{display:block;width:100%;margin-top:14px;border-radius:8px;background:#fff;border:1px solid #F5F5F5}
+.explore-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.explore-grid + .snake{margin-top:14px}
+.exp{background:#fff;border-radius:12px;padding:12px 10px 11px}
+.exp b{display:block;font-size:14px;font-weight:700;line-height:1.35;color:var(--ink)}
+.exp p{margin:6px 0 0;font-size:11px;font-weight:500;line-height:1.55;color:var(--ink-2)}
+.exp .nw{white-space:nowrap}
 
 .gate-sub{margin:0;padding:14px 12px 10px;border-top:1px solid #F5F5F5}
 .gate-sub-t{font-size:15px;font-weight:700}
@@ -310,7 +317,7 @@ body{
 .seg-item.on small{color:var(--brand)}
 .case-seg{margin-top:12px}
 .case-seg .seg-item{height:36px;font-size:12px;padding:0 2px}
-.path{padding:12px 12px 10px}
+.path{padding:12px 28px 10px 12px}
 .path h3{font-size:17px;font-weight:600;margin-bottom:4px}
 .path .lead{font-size:13px;color:var(--ink-2);line-height:1.55;margin-bottom:10px}
 .path .lead em{font-style:normal;color:var(--brand);font-weight:600}
@@ -320,6 +327,17 @@ body{
 .meta-row dt{flex:none;width:64px;color:var(--ink-3)}
 .meta-row dd{flex:1;color:var(--ink)}
 .meta-row dd em{font-style:normal;color:var(--brand);font-weight:600}
+.path-pts{display:flex;flex-direction:column;gap:14px}
+.path-pt{font-size:13px;line-height:1.55;color:var(--ink-2)}
+.path-pt > b{display:block;color:var(--ink);font-weight:700}
+.starline{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;margin-top:8px;padding:8px 10px;background:#FAFAFA;border-radius:8px}
+.starline span{display:flex;align-items:center;gap:4px;min-width:0;font-size:12px;color:var(--ink);white-space:nowrap}
+.starline i{font-style:normal;color:var(--brand);letter-spacing:.5px;font-size:11px;flex:none}
+.path-rows{border-top:1px solid #F3F3F3}
+.path-rows div{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #F3F3F3;font-size:13px;line-height:1.45}
+.path-rows b{flex:none;width:5.5em;font-weight:700;color:var(--ink);white-space:nowrap}
+.path-rows span{flex:1;min-width:0;color:var(--ink-2)}
+.path-rows em{font-style:normal;color:var(--brand);font-weight:700}
 .bullets{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
 .bullet{display:flex;gap:8px;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
 .bullet i{flex:none;width:15px;height:15px;margin-top:2px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-size:9px;font-style:normal;font-weight:700;display:flex;align-items:center;justify-content:center}
@@ -386,6 +404,55 @@ body{
 .dim-step b{display:block;height:2.6em;margin-top:3px;overflow:hidden;font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
 .dim-step span{display:block;height:2.7em;margin-top:3px;overflow:hidden;font-size:11px;font-weight:500;color:var(--ink-2);line-height:1.35}
 .dim-panel{margin-top:10px}
+.sprint{padding-right:28px}
+.sprint-core{background:#fff;border-radius:12px;padding:12px 12px 11px;margin-bottom:14px}
+.sprint-core b{display:block;margin-bottom:4px;font-size:13px;font-weight:700;color:var(--ink)}
+.sprint-core span{display:block;font-size:13px;font-weight:500;line-height:1.55;color:var(--ink-2)}
+.sprint-line{position:relative;margin-left:5px;padding-left:16px}
+.sprint-line.late{margin-top:16px}
+.stage-plus{margin-top:12px;background:#fff;border-radius:12px;padding:12px}
+.stage-plus b{display:block;margin-bottom:4px;font-size:13px;font-weight:700;color:var(--brand)}
+.stage-plus span{display:block;font-size:13px;font-weight:500;line-height:1.5;color:var(--ink-2)}
+.sprint-line::before{content:'';position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:#F3D5E0}
+.sprint-node{position:relative;padding-bottom:14px}
+.sprint-node:last-child{padding-bottom:0}
+.sprint-node::before{content:'';position:absolute;left:-16px;top:3px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--brand);box-sizing:border-box}
+.sprint-node b{display:flex;align-items:baseline;gap:6px;font-size:14px;font-weight:700;line-height:1.3;color:var(--ink)}
+.sprint-node b em{font-style:normal;font-size:11px;font-weight:700;color:var(--brand)}
+.sprint-node span{display:block;margin-top:4px;font-size:13px;font-weight:500;line-height:1.5;color:var(--ink-2)}
+.snake{position:relative;margin-top:2px;padding:0 12px}
+.fold .caps{display:grid;grid-template-columns:1fr 1fr 1fr;position:relative;align-items:end;padding-bottom:8px}
+.fold .caps.bot{align-items:start;padding-top:8px;padding-bottom:0}
+.fold .caps.to-l{padding-bottom:8px}
+.fold .caps.from-l{padding-top:8px}
+.cap{min-width:0;margin:0 2px;background:#fff;border-radius:12px;padding:9px 6px 8px;text-align:left}
+.cap i{display:block;font-style:normal;font-size:11px;font-weight:600;line-height:1.3;color:var(--ink-3)}
+.cap b{display:block;margin-top:1px;font-size:13px;font-weight:700;line-height:1.25;color:var(--ink)}
+.cap ul{margin:6px 0 0;padding:0;list-style:none}
+.cap li{position:relative;padding-left:8px;margin-top:2px;font-size:10px;font-weight:500;line-height:1.35;color:var(--ink-2)}
+.cap li::before{content:'';position:absolute;left:0;top:.45em;width:4px;height:4px;border-radius:50%;background:var(--brand)}
+.track{position:relative;height:14px}
+.track::before{content:'';position:absolute;left:16.67%;right:16.67%;top:6px;height:2px;background:#F3D5E0}
+.track.one::before{right:83.33%}
+.track .dot{position:absolute;z-index:1;top:2px;width:10px;height:10px;margin-left:-5px;border:2px solid var(--brand);border-radius:50%;background:#fff;box-sizing:border-box}
+.track .dot:nth-child(1){left:16.67%}
+.track .dot:nth-child(2){left:50%}
+.track .dot:nth-child(3){left:83.33%}
+.track.right2::before{left:50%;right:16.67%}
+.track.right2 .dot:nth-child(1){left:50%}
+.track.right2 .dot:nth-child(2){left:83.33%}
+.drop{position:relative;height:10px}
+.drop.right::before{content:'';position:absolute;z-index:0;box-sizing:border-box;top:-8px;bottom:-8px;right:-12px;width:calc(16.67% + 12px);border:2px solid #F3D5E0;border-left:0;border-radius:0 10px 10px 0}
+.track.stub-l::after{content:'';position:absolute;left:-12px;width:calc(16.67% + 12px);top:6px;height:2px;background:#F3D5E0}
+.caps.to-l::before,.caps.from-l::before{content:'';position:absolute;left:-12px;width:0;border-left:2px solid #F3D5E0}
+.caps.to-l::before{top:-8px;bottom:0}
+.caps.from-l::before{top:0;bottom:-8px}
+.rail-r{position:relative;width:33.333%;margin-left:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;padding:10px 14px 0 2px}
+.rail-r::before{content:'';position:absolute;top:-8px;right:4px;bottom:18px;width:2px;background:#F3D5E0}
+.rail-r::after{content:'';position:absolute;top:-8px;left:50%;right:4px;height:2px;background:#F3D5E0}
+.rail-r .cap{width:100%;margin:0}
+.rail-stop{position:relative}
+.rail-stop::after{content:'';position:absolute;z-index:1;right:-12px;top:12px;width:10px;height:10px;border:2px solid var(--brand);border-radius:50%;background:#fff;box-sizing:border-box}
 .flowline{position:relative;margin-left:6px;padding-left:22px}
 .flowline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#F3D5E0}
 .fnode{position:relative;padding-bottom:16px}
@@ -466,7 +533,9 @@ body{
 .node-lead .n-name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
 .node-lead .n-name span{font-size:10px;font-weight:500;background:rgba(255,255,255,.18);border-radius:99px;padding:2px 7px}
 .node-lead .n-desc{font-size:11.5px;line-height:1.6;color:rgba(255,255,255,.82);margin-top:3px}
+.node-lead .n-desc em{font-style:normal;font-weight:700;color:#fff}
 .conn{display:block;width:100%;height:34px}
+.conn.short{height:22px}
 .branch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .branch-col{border:1px solid var(--line);border-radius:10px;padding:12px 8px;background:#FAFAFA}
 .branch-title{font-size:11.5px;font-weight:600;color:var(--brand);letter-spacing:.08em;text-align:center;padding-bottom:10px;border-bottom:1px dashed var(--line-2);margin-bottom:10px}
@@ -474,13 +543,15 @@ body{
 .mentor + .mentor{margin-top:12px}
 .mentor:active{opacity:.6}
 .mentor img{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;background:var(--brand-soft)}
-.mentor .m-name{font-size:12px;font-weight:600;line-height:1.35;white-space:nowrap;letter-spacing:-.02em}
+.mentor .m-name{font-size:12px;font-weight:600;line-height:1.35;letter-spacing:-.02em}
+.m-tag{display:inline-block;margin-top:3px;font-size:10px;font-weight:600;line-height:1.4;color:var(--brand);background:var(--brand-soft);border-radius:99px;padding:1px 6px}
 .mentor .m-duty{font-size:11px;color:var(--ink-2);line-height:1.55;margin-top:2px}
+.mentor .m-duty em,.node-base .n-desc em{font-style:normal;color:var(--brand);font-weight:700}
 .node-base{display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:var(--accent-soft);border-color:rgba(206,61,110,.24)}
 .node-base img{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:none;background:#fff}
 .node-base .n-name{font-size:13px;font-weight:600}
 .node-base .n-desc{font-size:11px;color:var(--ink-2);line-height:1.55;margin-top:2px}
-.node-base .n-badge{margin-left:auto;flex:none;font-size:10px;color:var(--accent);border:1px solid rgba(206,61,110,.35);border-radius:99px;padding:2px 7px}
+.node-base .n-badge{margin-left:auto;flex:none;font-size:10px;color:var(--accent);border:1px solid rgba(206,61,110,.35);border-radius:99px;padding:2px 7px;white-space:nowrap}
 
 /* ============ 05b 代表性案例 ============ */
 .case-group{font-size:15px;font-weight:600;color:var(--brand);margin-bottom:12px;display:flex;align-items:center;gap:8px}
@@ -517,6 +588,12 @@ body{
 /* ============ 04 Offer ============ */
 .seg-mini{display:flex;background:#F5F5F5;border-radius:9px;padding:3px;margin-bottom:14px}
 .seg-sub{margin-top:-6px;margin-bottom:10px}
+.offer-pills{display:flex;gap:8px;overflow-x:auto;margin:-4px 0 12px;scrollbar-width:none}
+.offer-pills::-webkit-scrollbar{display:none}
+.offer-pills[hidden]{display:none}
+.bf-pill{appearance:none;flex:none;height:32px;padding:0 12px;border:0;border-radius:99px;background:#F2F2F2;color:#3A3A3A;font-family:var(--sans);font-size:12px;font-weight:500;line-height:1;white-space:nowrap;cursor:pointer}
+.bf-pill.on{background:var(--brand);color:#fff;font-weight:600}
+.offer-empty{padding:22px 16px;text-align:center;font-size:12px;line-height:1.55;color:var(--ink-3)}
 .seg-mini .seg-item{height:34px;font-size:13px;padding:0 4px}
 .offer{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
 .offer-row{display:block;padding:0}
@@ -572,7 +649,7 @@ body{
 .offer-rank{flex:none;font-size:11px;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:5px;padding:2px 7px;min-width:22px;text-align:center;white-space:nowrap}
 .offer-note{margin-top:8px;font-size:10.5px;color:var(--ink-3);line-height:1.55}
 .offer-name{font-size:14px;font-weight:500}
-.badge{font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:3px;padding:1px 5px}
+.badge{flex:none;font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:3px;padding:1px 5px;white-space:nowrap}
 .offer-right{display:flex;align-items:baseline;gap:2px;flex:none}
 .offer-right b{font-size:17px;font-weight:700;color:var(--brand)}
 .offer-right span{font-size:11px;color:var(--ink-3)}
@@ -724,8 +801,19 @@ body{
             <div class="seg-item on" data-o="us">美本</div>
             <div class="seg-item" data-o="ukhk">英国 · 港新</div>
           </div>
+          <div class="offer-pills" id="offerTags">
+            <button type="button" class="bf-pill on" data-v="all">全部</button>
+            <button type="button" class="bf-pill" data-v="hypsm">哈耶普斯麻</button>
+            <button type="button" class="bf-pill" data-v="comp">TOP30综合类</button>
+            <button type="button" class="bf-pill" data-v="art">TOP30艺术类</button>
+          </div>
+          <div class="offer-pills" id="offerTagsUk" hidden>
+            <button type="button" class="bf-pill on" data-v="all">全部</button>
+            <button type="button" class="bf-pill" data-v="hk8">港八大</button>
+            <button type="button" class="bf-pill" data-v="g5">G5</button>
+          </div>
           <div class="offer" id="offerBox"></div>
-          <div class="offer-note" id="offerNote">排名口径：US News 全美大学排名，按名次从高到低排列。</div>
+          <div class="offer-note" id="offerNote" hidden></div>
         </div>
 
         <div class="divider"></div>
@@ -760,20 +848,16 @@ body{
         <div class="sec" id="secPath">
           <div class="sec-head">
             <div class="sec-title" style="font-weight:700">艺术爬藤三大路径</div>
-            <div class="sec-sub">先对上孩子现在的情况，再看该走哪一条。</div>
           </div>
           <div class="path-rail" id="pathRail">
             <button type="button" class="rail-card" data-p="0">
-              <span class="sit">孩子成绩中等，够不着梦校</span>
-              <span class="pname">艺术爬藤 ›</span>
+              <span class="pname"><b>艺术专业爬藤</b><i>综合名校的艺术专业</i></span>
             </button>
             <button type="button" class="rail-card" data-p="1">
-              <span class="sit">孩子成绩不错，但没特点</span>
-              <span class="pname">艺术特长爬藤 ›</span>
+              <span class="pname"><b>艺术特长爬藤</b><i>传统专业 + 艺术加分</i></span>
             </button>
             <button type="button" class="rail-card on" data-p="2">
-              <span class="sit">已确定把艺术作为长期职业方向</span>
-              <span class="pname">爬艺术藤校 ›</span>
+              <span class="pname"><b>爬艺术藤校</b><i>顶尖纯艺术 / 设计院校</i></span>
             </button>
           </div>
           <div class="card" id="pathBox"><div class="path">
@@ -784,7 +868,7 @@ body{
       <div class="meta-row"><dt>审核方</dt><dd>以<em>作品集评审</em>为主</dd></div>
       <div class="meta-row"><dt>准备周期</dt><dd>建议 <em>18–24 个月</em></dd></div>
     </div>
-    <div class="bullets"><div class="bullet"><i>✓</i><div><b>适合：</b>已确定把艺术作为长期职业方向</div></div><div class="bullet"><i>✓</i><div><b>关键：</b>个人表达与技法同等重要，要有自己的语言</div></div></div>
+    <div class="bullets"><div class="bullet"><i>✓</i><div><b>适合：</b>想申请顶尖艺术学院，艺术不必先定成长期职业</div></div><div class="bullet"><i>✓</i><div><b>关键：</b>个人表达与技法同等重要，要有自己的语言</div></div></div>
   </div></div>
           <div class="path-else">
             <button type="button" data-t="quiz"><b>孩子想走艺术，不知从哪开始</b><em>做 30 秒测评 ›</em></button>
@@ -797,19 +881,19 @@ body{
         <!-- 02-1 申请逻辑：三位一体 -->
         <div class="sec" id="secLogic">
           <div class="tri2">
-            <div class="tri2-title">艺术爬藤申请逻辑</div>
+            <div class="tri2-title">艺术爬藤核心竞争力 · 优势</div>
             <div class="tri2-row">
               <div class="tri2-col">
                 <div class="tri2-dot">活动</div>
-                <div class="tri2-name">主线清晰</div>
+                <div class="tri2-name">主线理清楚</div>
               </div>
               <div class="tri2-col">
                 <div class="tri2-dot">文书</div>
-                <div class="tri2-name">讲清动机</div>
+                <div class="tri2-name">动机讲明白</div>
               </div>
               <div class="tri2-col">
                 <div class="tri2-dot">作品集</div>
-                <div class="tri2-name">呈现思考</div>
+                <div class="tri2-name">思考看得到</div>
               </div>
             </div>
             <div class="tri2-c">
@@ -819,8 +903,8 @@ body{
               <div class="tc-h"></div>
               <div class="tc-down"></div>
             </div>
-            <div class="tri2-result">= 鲜明的申请人形象</div>
-            <p class="tri2-note">招生官 30 秒内记住你是谁，而不是第几个 GPA 3.7</p>
+            <div class="tri2-result">= 一个鲜明的申请人形象</div>
+            <p class="tri2-note">招生官 30 秒内记住的是你这个人，不是又一个 GPA 3.7。</p>
           </div>
           <div class="evid">
           <div class="yale-card">
@@ -888,8 +972,8 @@ body{
             <div class="sec-title" style="font-size:24px">艺术爬藤案例</div>
           </div>
           <div class="seg case-seg" id="caseSeg">
-            <div class="seg-item" data-k="0">艺术爬藤</div>
-            <div class="seg-item" data-k="1">特长爬藤</div>
+            <div class="seg-item" data-k="0">艺术专业爬藤</div>
+            <div class="seg-item" data-k="1">艺术特长爬藤</div>
             <div class="seg-item on" data-k="2">爬艺术藤校</div>
           </div>
           <div class="case-grid">
@@ -1105,74 +1189,125 @@ body{
             <div class="sec-title">服务体系</div>
           </div>
           <div class="flow">
-            <!-- 主导师 -->
+            <!-- 规划顾问 -->
             <div class="node-lead">
-              <img src="assets/mentor-1.png" alt="主导师">
+              <img src="assets/mentor-advisor.jpg" alt="规划顾问">
               <div>
-                <div class="n-name">主导师 <span>全程总指挥</span></div>
-                <div class="n-desc">定申请方向与阶段目标，统筹选校定位、文书主线与六方节奏</div>
+                <div class="n-name">规划顾问 <span>顶层统筹</span></div>
+                <div class="n-desc">定好<em>申请方向和阶段目标</em>，把选校、文书和协作节奏拉到一起</div>
               </div>
             </div>
 
-            <!-- 连线：主导师 → 双线 -->
             <svg class="conn" viewBox="0 0 320 34" preserveAspectRatio="none">
               <path d="M160 0 V14 M84 14 H236 M84 14 V34 M236 14 V34" fill="none" stroke="#E0E0E0" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
               <circle cx="84" cy="34" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
               <circle cx="236" cy="34" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
             </svg>
 
-            <!-- 双线 -->
             <div class="branch">
               <div class="branch-col">
                 <div class="branch-title">学 术 线</div>
-                <div class="mentor" data-role="规划 &amp; 选校导师">
-                  <img src="assets/mentor-2.png" alt="规划与选校导师">
+                <div class="mentor" data-role="留学申请教研老师">
+                  <img src="assets/mentor-2.png" alt="留学申请教研老师">
                   <div>
-                    <div class="m-name">规划 &amp; 选校导师</div>
-                    <div class="m-duty">课程、标化与背景提升排期，制定选校梯度</div>
+                    <div class="m-name">留学申请教研老师</div>
+                    <div class="m-tag">审核＆把控</div>
+                    <div class="m-duty">盯住录取口径和材料，<em>审核把控</em>方案</div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="选校规划老师">
+                  <img src="assets/mentor-3.png" alt="选校规划老师">
+                  <div>
+                    <div class="m-name">选校规划老师</div>
+                    <div class="m-duty">按成绩和路径，定出<em>选校梯度</em></div>
                   </div>
                 </div>
                 <div class="mentor" data-role="文书指导老师">
-                  <img src="assets/mentor-3.png" alt="文书指导老师">
+                  <img src="assets/mentor-5.png" alt="文书指导老师">
                   <div>
                     <div class="m-name">文书指导老师</div>
-                    <div class="m-duty">主文书、补充文书与活动列表的主线梳理</div>
+                    <div class="m-duty">把主文书、补充文书和活动列表收成<em>一条主线</em></div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="申请指导老师">
+                  <img src="assets/mentor-6.png" alt="申请指导老师">
+                  <div>
+                    <div class="m-name">申请指导老师</div>
+                    <div class="m-duty">跟上<em>网申、推荐信和面试</em></div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="背景提升指导老师">
+                  <img src="assets/mentor-1.png" alt="背景提升指导老师">
+                  <div>
+                    <div class="m-name">背景提升指导老师</div>
+                    <div class="m-duty">排好<em>课程、标化和活动</em>，把背景做实</div>
                   </div>
                 </div>
               </div>
               <div class="branch-col">
                 <div class="branch-title">艺 术 线</div>
-                <div class="mentor" data-role="教研导师">
-                  <img src="assets/mentor-4.png" alt="教研导师">
+                <div class="mentor" data-role="作品集教研导师">
+                  <img src="assets/mentor-4.png" alt="作品集教研导师">
                   <div>
-                    <div class="m-name">教研导师</div>
-                    <div class="m-duty">作品集主题、创作与呈现，定期评估进度质量</div>
+                    <div class="m-name">作品集教研导师</div>
+                    <div class="m-tag">审核＆把控</div>
+                    <div class="m-duty">看住完成度，<em>审核把控</em>作品集</div>
                   </div>
                 </div>
-                <div class="mentor" data-role="海外导师">
-                  <img src="assets/mentor-5.png" alt="海外导师">
+                <div class="mentor" data-role="作品集导师">
+                  <img src="assets/mentor-2.png" alt="作品集导师">
                   <div>
-                    <div class="m-name">海外导师</div>
-                    <div class="m-duty">按海外院校评审标准深化作品、拓展专业认知</div>
+                    <div class="m-name">作品集导师</div>
+                    <div class="m-duty">带着做<em>选题、创作和呈现</em></div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="国际艺术课程导师">
+                  <img src="assets/mentor-3.png" alt="国际艺术课程导师">
+                  <div>
+                    <div class="m-name">国际艺术课程导师</div>
+                    <div class="m-duty">排好<em>国际艺术课程</em>，学分和作品一起用</div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="行业大咖导师">
+                  <img src="assets/mentor-1.png" alt="行业大咖导师">
+                  <div>
+                    <div class="m-name">行业大咖导师</div>
+                    <div class="m-duty">按<em>行业实践</em>看作品方向</div>
+                  </div>
+                </div>
+                <div class="mentor" data-role="海外教授导师">
+                  <img src="assets/mentor-5.png" alt="海外教授导师">
+                  <div>
+                    <div class="m-name">海外教授导师</div>
+                    <div class="m-duty">按<em>海外院校评审标准</em>打磨作品</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- 连线：双线 → 教务 -->
             <svg class="conn" viewBox="0 0 320 34" preserveAspectRatio="none">
               <path d="M84 0 V20 M236 0 V20 M84 20 H236 M160 20 V34" fill="none" stroke="#E0E0E0" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
               <circle cx="160" cy="34" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
             </svg>
 
-            <!-- 教务 -->
             <div class="node-base">
               <img src="assets/mentor-6.png" alt="教务老师">
               <div>
                 <div class="n-name">教务老师</div>
-                <div class="n-desc">任务排期与节点提醒，发现进度偏差及时协调</div>
+                <div class="n-desc">排好<em>任务和节点</em>，进度一偏就协调</div>
               </div>
-              <div class="n-badge">全程</div>
+              <div class="n-badge">全程保障</div>
+            </div>
+            <svg class="conn short" viewBox="0 0 320 22" preserveAspectRatio="none">
+              <path d="M160 0 V22" fill="none" stroke="#E0E0E0" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+              <circle cx="160" cy="22" r="2.6" fill="#E0E0E0" vector-effect="non-scaling-stroke"></circle>
+            </svg>
+            <div class="node-base">
+              <img src="assets/mentor-4.png" alt="未来就业力导师">
+              <div>
+                <div class="n-name">未来就业力导师</div>
+                <div class="n-desc">按目标行业，把作品和经历收成<em>就业方向</em></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1220,8 +1355,6 @@ body{
               <div class="cb"><b>1v1 诊断</b>可预约 30 分钟个性化评估</div>
             </div>
             <div class="comm-imgs">
-              <img class="ci" src="assets/comm-covers.jpg" alt="社群资料包实物">
-              <div class="ci-cap">10 份资料包，进群直接领全套</div>
               <img class="ci" src="assets/comm-qa.jpg" alt="社群答疑实录">
               <div class="ci-cap">往期答疑实录：进群接龙提问，导师群里答</div>
             </div>
@@ -1322,7 +1455,7 @@ body{
     <nav class="anchors" id="anchors">
       <button type="button" data-go="secOffer">offer榜</button>
       <button type="button" data-go="secPath">三大路径</button>
-      <button type="button" data-go="secLogic">申请逻辑</button>
+      <button type="button" data-go="secLogic">核心竞争力</button>
       <button type="button" data-go="secTl">时间规划</button>
       <button type="button" data-go="secCases">案例</button>
       <button type="button" data-go="secAdv">课程提升</button>
@@ -1382,7 +1515,7 @@ body{
       <div class="of-left"><span class="of-rank">27</span><span class="of-name">爱丁堡大学</span><span class="badge">艺术人文强校</span></div>
       <div class="of-right"><b>136</b><span>枚</span></div>
     </div></div>
-        <div class="modal-note" id="srcNote">排名口径：QS 世界大学排名，按名次从高到低排列。 生源信息为部分公开样本，其余待补充。</div>
+        <div class="modal-note" id="srcNote">生源信息为部分公开样本，其余待补充。</div>
         <div class="modal-cta">
           <button class="btn btn-primary" id="srcCta">查我所在城市出过多少录取 ›</button>
         </div>
@@ -1413,24 +1546,29 @@ function toast(t, d){
 }
 
 /* ---------- 路径 ---------- */
+const star = (items) => '<div class="starline">' + items.map(s => '<span>' + s[0] + '<i>' + s[1] + '</i></span>').join('') + '</div>';
+const rows = (items) => '<div class="path-rows">' + items.map(s => '<div><b>' + s[0] + '</b><span>' + s[1] + '</span></div>').join('') + '</div>';
 const paths = [
   {
-    name:'艺术爬藤',
-    lead:'申请综合大学的艺术专业，<em>作品集是主材料</em>。',
-    meta:[['作品集','必交，占审核权重 <em>50% 以上</em>'],['审核方','<em>艺术学院单独审核</em>，名额独立'],['准备周期','建议 <em>12–18 个月</em>']],
-    bullets:['<b>适合：</b>艺术方向清晰，愿意为作品集稳定投入时间','<b>关键：</b>作品要体现完整的思考过程，不只是成品','<b>常见误区：</b>高三才开始，来不及做出有深度的项目']
+    name:'艺术专业爬藤',
+    pts:[
+      '<b>申请核心要素</b>' + star([['艺术能力','★★★★★'],['社会实践','★★★★★'],['标化','★★★★'],['学术','★★★★']]),
+      rows([['申请方向','综合大学内的<em>艺术学院 / 艺术专业</em>'],['作品集权重','<em>核心录取标准</em>，审核占比通常 50% 以上'],['录取主导','<em>艺术学院独立审核与录取</em>'],['学术门槛','GPA 3.6–3.8，<em>不卷极限高分</em>，更看重学术与专业能力的平衡'],['适合人群','有艺术兴趣和基础，想以艺术为跳板进入顶尖综合名校']])
+    ]
   },
   {
     name:'艺术特长爬藤',
-    lead:'申请非艺术专业，作品集作为<em>补充材料</em>提交。',
-    meta:[['作品集','<em>选交</em>，提升辨识度、制造记忆点'],['审核方','<em>本科学院统一审核</em>，看整体竞争力'],['准备周期','建议 <em>6–12 个月</em>']],
-    bullets:['<b>适合：</b>学术成绩有竞争力，但缺少一个让人记住的标签','<b>关键：</b>作品要与申请方向有关联，而不是硬塞','<b>加分点：</b>与工程、商科、社科结合的跨学科项目']
+    pts:[
+      '<b>申请核心要素</b>' + star([['学术','★★★★★'],['社会实践','★★★★★'],['标化','★★★★★'],['艺术能力','★★★★']]),
+      rows([['申请方向','综合大学的<em>本科学院</em>（非艺术专业）'],['作品集权重','<em>差异化补充材料</em>，非硬性录取门槛'],['录取主导','<em>综合大学本科学院</em>审核与录取'],['学术门槛','GPA 3.9+，托福 110+，<em>学术门槛极高</em>'],['适合人群','学术极强，需用艺术特长拉开与学霸的竞争差距']])
+    ]
   },
   {
     name:'爬艺术藤校',
-    lead:'不走综合排名，直奔<em>全球顶尖艺术学院</em>。',
-    meta:[['作品集','<em>决定性材料</em>，几乎直接决定录取'],['审核方','以<em>作品集评审</em>为主'],['准备周期','建议 <em>18–24 个月</em>']],
-    bullets:['<b>适合：</b>已确定把艺术作为长期职业方向','<b>关键：</b>个人表达与技法同等重要，要有自己的语言']
+    pts:[
+      '<b>申请核心要素</b>' + star([['艺术能力','★★★★★'],['学术','★★★'],['标化','★★★'],['社会实践','★★★']]),
+      rows([['申请方向','罗德岛等全球顶尖<em>独立艺术院校</em>'],['作品集权重','<em>绝对决定性材料</em>（一票否决制）'],['录取主导','<em>艺术学院独立审核与录取</em>'],['学术门槛','门槛较灵活，SAT/ACT <em>非硬性要求</em>，以作品集为绝对核心'],['适合人群','极具艺术天赋，渴望直通世界级大师资源与圈子']])
+    ]
   }
 ];
 function showCases(k){
@@ -1462,16 +1600,24 @@ const talentCases = [
 const schoolCases = [
   ['casePan','潘同学 · 布朗大学 + 罗德岛设计学院双学位','服装设计方向 · 全A · SAT 1500+ · 藤校夏校 · 国家级艺术竞赛金奖']
 ];
+const pathSits = [
+  '孩子有艺术兴趣，但学术成绩够不着梦校，<b>想弯道超车</b>',
+  '孩子成绩拔尖，但缺乏让人记住的鲜明特点，<b>想锦上添花</b>',
+  '孩子有艺术天赋，想给他最好的舞台，<b>想直冲顶尖</b>'
+];
+const pathGos = [
+  '用艺术专业作为申请通道，冲刺藤校/G5 ›',
+  '主申商科、计算机等热门专业，用艺术作品集做差异化加分 ›',
+  '直申罗德岛等顶尖艺术名校，走专业艺术家路线 ›'
+];
 function renderPath(i){
   const p = paths[i];
   const list = [pathCases, talentCases, schoolCases][i] || [];
   const reps = `<div class="reps"><span class="rep-k">代表性案例</span>${list.map(c=>`<button type="button" class="rep" data-case="${c[0]}"><b>${c[1]}</b><span class="rep-s">${c[2]}</span></button>`).join('')}</div>`;
   $('#pathBox').innerHTML = `<div class="path">
-    <p class="lead">${p.lead}</p>
-    <div class="meta">
-      ${p.meta.map(m=>`<div class="meta-row"><dt>${m[0]}</dt><dd>${m[1]}</dd></div>`).join('')}
-    </div>
-    <div class="bullets">${p.bullets.map(b=>`<div class="bullet"><i>✓</i><div>${b}</div></div>`).join('')}</div>
+    <div class="path-sit">${pathSits[i]}</div>
+    <div class="path-go">${pathGos[i]}</div>
+    <div class="path-pts">${p.pts.map(t => `<div class="path-pt">${t}</div>`).join('')}</div>
     ${reps}
   </div>`;
   $$('#pathBox .rep').forEach(b=> { if(b.dataset.case) b.onclick = ()=> goCase(b.dataset.case); });
@@ -1489,10 +1635,15 @@ showCases(2);
 /* ---------- 时间轴 ---------- */
 /* ---------- 时间轴（6-8 年级为第一档） ---------- */
 const explorePoints = [
-  ['好奇心最旺','新材料、新画法都想试，教什么上手都快。'],
-  ['试错成本低','没有申请压力，画坏了推倒重来，不心疼。'],
-  ['感受力强','色彩、声音、故事，这个阶段吸收得最快。'],
-  ['习惯能扎根','速写、观察笔记天天做一点，攒下来就是作品集的家底。']
+  ['好奇心最旺','多媒介自由尝试，定位兴趣、避免盲目报班'],
+  ['试错成本低','大胆试、推倒重来，护住内驱力，后期不畏难'],
+  ['感知开放','抓住色彩、空间、叙事的敏感期，养成科班视觉直觉'],
+  ['习惯能扎根','草图、观察笔记、口头表达，沉淀成真实申请素材']
+];
+const exploreStages = [
+  ['6 年级','学会观看',['从日常观察入手','练习看图与转译','启蒙色彩与<br>空间意识','把想法做成<br>小作品']],
+  ['7 年级','学会批判',['围绕个人经验<br>做调研课题','学会提问与立论','养成质疑与<br>思辨习惯']],
+  ['8 年级','学会发声',['完整策划一次<br>小展示','从创作者走向<br>表达者','整理过程档案与<br>作品陈述']]
 ];
 const timelines = [
   {
@@ -1535,10 +1686,15 @@ const timelines = [
 ];
 function stairBody(t){
   if(t.chart){
-    return `<img class="explore-chart" src="assets/explore-curve.png" alt="学业压力与认知能力曲线">
-      <div class="explore-grid">
-        ${explorePoints.map(p=>`<div class="exp"><div class="exp-name">${p[0]}</div><div class="exp-desc">${p[1]}</div></div>`).join('')}
-      </div>
+    return `<div class="sprint">
+      <div class="sprint-core"><b>核心定位</b><span>在无升学压力的年纪，唤醒真实热爱，夯实审美根基</span></div>
+    </div>
+      <img class="explore-chart" src="assets/explore-curve.png" alt="学业压力与认知能力曲线">
+      <div class="sprint">
+      <div class="explore-grid">${explorePoints.map(p=>`<div class="exp"><b>${p[0]}</b><p>${p[1]}</p></div>`).join('')}</div>
+      ${snakeRows(exploreStages)}
+      <div class="stage-plus"><b>贯穿增值线</b><span>6–8 年级期间可安排 1–2 期海外教授冬/夏校营，在真实创作与 Critique 中检验所学、沉淀素材</span></div>
+    </div>
       <div class="works">
         <div class="works-t">探索课真实产出 · 6–8 年级学生作品</div>
         <div class="works-row">
@@ -1560,13 +1716,69 @@ function planTasks(indexes){
   }).join('');
 }
 const gradePlans = [
-  { k:'艺藤Junior', name:'低龄艺术探索', sub:'6–8 年级', chart:true },
-  { k:'长线规划', name:'9–12 年级', sub:'从基础到递交', indexes:[1,2,3,4] },
-  { k:'短期规划', name:'11–12 年级', sub:'作品集做到大半再递交', indexes:[3,4] }
+  { k:'低龄艺术探索期', name:'6–8 年级', sub:'', chart:true },
+  { k:'长线系统规划', name:'9–12 年级', sub:'', long:true },
+  { k:'短期规划', name:'11–12 年级', sub:'', sprint:true }
 ];
+function planPanel(core, rows){
+  return `<div class="sprint">
+    <div class="sprint-core"><b>核心定位</b><span>${core}</span></div>
+    <div class="sprint-line">${rows.map(r=>`<div class="sprint-node"><b>${r[0]}${r[1] ? `<em>${r[1]}</em>` : ''}</b><span>${r[2]}</span></div>`).join('')}</div>
+  </div>`;
+}
+function snakeRows(rows){
+  const node = r => `<div class="cap"><i>${r[0]}</i><b>${r[1]}</b><ul>${r[2].map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
+  const cells = (list, fromRight) => {
+    const arr = list.slice();
+    if(fromRight) arr.reverse();
+    if(fromRight && arr.length < 3) while(arr.length < 3) arr.unshift(null);
+    return arr.map(r => r ? node(r) : '<div></div>').join('');
+  };
+  const track = (n, stub, fromRight) => `<div class="track${stub?' stub-l':''}${n===1?' one':''}${fromRight && n===2?' right2':''}">${'<i class="dot"></i>'.repeat(n)}</div>`;
+  let html = '';
+  for(let i=0;i<rows.length;i+=6){
+    const top = rows.slice(i, i+3);
+    const bot = rows.slice(i+3, i+6);
+    const continued = i > 0;
+    const goesOn = i+6 < rows.length;
+    html += `<div class="fold"><div class="caps${continued?' from-l':''}">${cells(top, false)}</div>${track(top.length, continued, false)}`;
+    if(bot.length && bot.length < 3 && !goesOn){
+      html += `<div class="rail-r">${bot.map(r=>`<div class="rail-stop">${node(r)}</div>`).join('')}</div>`;
+    }else if(bot.length){
+      html += `<div class="drop right"></div>${track(bot.length, goesOn, true)}<div class="caps bot${goesOn?' to-l':''}">${cells(bot, true)}</div>`;
+    }
+    html += `</div>`;
+  }
+  return `<div class="snake">${html}</div>`;
+}
+function snakePanel(core, rows){
+  return `<div class="sprint"><div class="sprint-core"><b>核心定位</b><span>${core}</span></div>${snakeRows(rows)}</div>`;
+}
+function longBody(){
+  return snakePanel('前两年把兴趣聚焦成明确的专业方向，后两年把方向落成 offer，四年一个完整闭环',[
+    ['9 年级上','基础搭建',['造型色彩<br>软件训练','创作习惯养成']],
+    ['9 年级下','方向初筛',['锁定 1-2 个<br>意向方向','活动规划起步','灵感素材库']],
+    ['10 年级上','方向验证',['验证候选方向','确认申请方向']],
+    ['10 年级下','背景深化',['活动规划深化','英语能力打底']],
+    ['11 年级上','申请前冲刺',['学术测评','语言冲刺<br>2-3 次','成绩/预估<br>分达标']],
+    ['11 年级下','选校定档',['3-5 月初定<br>专业院校','7 月定<br>院校名单']],
+    ['11 年级暑假','作品与文书',['海外夏校<br>+大师课','主文书初稿']],
+    ['12 年级上','递交与面试',['作品集<br>收尾排版','提交网申<br>并追踪','面试准备']],
+    ['12 年级下','录取定校',['offer 比对<br>与入读','后续材料衔接']]
+  ]);
+}
+function sprintBody(){
+  return snakePanel('精准聚焦，把握关键窗口，集中解决标化、作品集、选校与递交',[
+    ['11 年级上','申请前冲刺',['学术测评','语言冲刺<br>2-3 次','成绩/预估<br>分达标','进度定期追踪']],
+    ['11 年级下','选校定档',['3-5 月初定<br>专业院校','7 月定<br>院校名单']],
+    ['11 年级暑假','作品与文书',['海外夏校<br>+大师课','主文书初稿']],
+    ['12 年级上','递交与面试',['作品集<br>收尾排版','提交网申<br>并追踪','面试准备']],
+    ['12 年级下','录取定校',['offer 比对<br>与入读','后续材料衔接']]
+  ]);
+}
 function renderDims(open){
   const p = gradePlans[open];
-  const body = open < 0 ? '' : (p.chart ? stairBody({chart:true}) : '<div class="flowline">' + planTasks(p.indexes) + '</div>');
+  const body = open < 0 ? '' : (p.chart ? stairBody({chart:true}) : (p.long ? longBody() : (p.sprint ? sprintBody() : '<div class="flowline">' + planTasks(p.indexes) + '</div>')));
   $('#dims').innerHTML = `<div class="dim-row">` + gradePlans.map((item,i)=>`<div class="dim${i===open?' on':''}" data-i="${i}">
       <button type="button" class="dim-step">
         <span class="dim-k">${item.k}</span>
@@ -1585,12 +1797,12 @@ renderDims(0);
 /* Offer 榜：统一 [排名, 校名, 徽章, 枚数]，按名次升序 */
 const offers = {
   us:[
-    ['1','普林斯顿大学','藤校',1],['2','麻省理工学院','大藤',1],['4','斯坦福大学','大藤',1],['5','耶鲁大学','藤校',2],
+    ['1','普林斯顿大学','',1],['2','麻省理工学院','',1],['4','斯坦福大学','',1],['5','耶鲁大学','',2],
     ['文理学院','威廉姆斯学院','',1],
-    ['6','约翰霍普金斯大学','',42],['6','西北大学','',4],['10','宾夕法尼亚大学','藤校',5],
-    ['11','芝加哥大学','',1],['11','康奈尔大学','藤校',28],['13','布朗大学','藤校',2],['13','哥伦比亚大学','藤校',1],
+    ['6','约翰霍普金斯大学','',42],['6','西北大学','',4],['10','宾夕法尼亚大学','',5],
+    ['11','芝加哥大学','',1],['11','康奈尔大学','',28],['13','布朗大学','',2],['13','哥伦比亚大学','',1],
     ['文理学院','史密斯学院','',1],
-    ['15','达特茅斯学院','藤校',2],['15','加州大学洛杉矶分校','',23],['17','加州大学伯克利分校','',24],
+    ['15','达特茅斯学院','',2],['15','加州大学洛杉矶分校','',23],['17','加州大学伯克利分校','',24],
     ['21','卡内基梅隆大学','',21],['21','密歇根大学安娜堡分校','',15],['21','圣路易斯华盛顿大学','',13],
     ['24','弗吉尼亚大学','',8],['27','南加州大学','',111],['27','北卡罗来纳大学教堂山分校','',5],
     ['29','加州大学圣地亚哥分校','',41],['30','纽约大学','',135],['37','塔夫茨大学','',10]
@@ -1602,16 +1814,42 @@ const offers = {
   ]
 };
 const offerRankNote = {
-  us:'排名口径：US News 全美大学排名，按名次从高到低排列。同一所学校的专业录取与特长录取已合并。威廉姆斯学院、史密斯学院是文理学院，按申请档次排入，不放在名单末尾。',
-  ukhk:'排名口径：QS 世界大学排名。英国、中国香港、新加坡按名次从高到低排在一起。'
+  us:'',
+  ukhk:''
 };
 let offerRegion = 'us';
+let offerTag = 'all';
+let offerTagUk = 'all';
+const hypsmNames = new Set(['哈佛大学','耶鲁大学','普林斯顿大学','斯坦福大学','麻省理工学院']);
+const hk8Names = new Set(['香港大学','香港中文大学','香港科技大学']);
+function offerPicked(o){
+  if(offerRegion === 'us'){
+    if(offerTag === 'all') return true;
+    if(offerTag === 'hypsm') return hypsmNames.has(o[1]);
+    if(offerTag === 'art') return false;
+    if(offerTag === 'comp'){
+      const n = parseInt(o[0], 10);
+      return Number.isFinite(n) && n <= 30;
+    }
+    return true;
+  }
+  if(offerTagUk === 'all') return true;
+  if(offerTagUk === 'hk8') return hk8Names.has(o[1]);
+  if(offerTagUk === 'g5') return o[2] === 'G5';
+  return true;
+}
 function renderOffer(){
-  $('#offerBox').innerHTML = offers[offerRegion].map(o=>`<div class="offer-row">
+  const usTags = $('#offerTags');
+  const ukTags = $('#offerTagsUk');
+  if(usTags) usTags.hidden = offerRegion !== 'us';
+  if(ukTags) ukTags.hidden = offerRegion !== 'ukhk';
+  const list = offers[offerRegion].filter(offerPicked);
+  $('#offerBox').innerHTML = list.length ? list.map(o=>`<div class="offer-row">
       <div class="offer-line"><div class="offer-left"><span class="offer-rank">${o[0]}</span><span class="offer-name">${o[1]}</span>${o[2]?`<span class="badge">${o[2]}</span>`:''}</div>
       <div class="offer-right"><b>${o[3]}</b><span>枚</span></div></div>
-    </div>`).join('');
-  $('#offerNote').textContent = offerRankNote[offerRegion];
+    </div>`).join('') : '<div class="offer-empty">这一档还没有收录录取枚数。</div>';
+  $('#offerNote').textContent = '';
+  $('#offerNote').hidden = true;
 }
 function closeSrc(){ $('#srcMask').classList.remove('show'); }
 (function(){
@@ -1620,7 +1858,7 @@ function closeSrc(){ $('#srcMask').classList.remove('show'); }
   if (num) num.textContent = all.reduce((s,o)=> s + o[3], 0);
   const board = $('#tallyBoard');
   if (!board) return;
-  const ivy = offers.us.filter(o=> o[2] === '藤校' || o[2] === '大藤');
+  const ivy = offers.us.filter(o=> o[2] === '特长爬藤');
   const short = n => n.replace(/大学$/,'').replace(/学院$/,'');
   board.innerHTML = ivy.map(o=>
     `<div class="tb-row"><span class="tb-rank">#${o[0]}</span><span class="tb-name">${short(o[1])}</span><span class="tb-num"><b>${o[3]}</b><span>枚</span></span></div>`
@@ -1644,7 +1882,7 @@ function renderSrc(){
       <div class="of-right"><b>${o[3]}</b><span>枚</span></div>
     </div>` + (s ? `<div class="of-src">生源：${s.school}</div>` : '');
   }).join('') : '<div class="of-empty">暂无已公开的录取样本。<br>可留信息，让顾问帮你查同城案例。</div>');
-  $('#srcNote').textContent = offerRankNote[srcRegion] + ' 生源信息为部分公开样本，其余待补充。';
+  $('#srcNote').textContent = '生源信息为部分公开样本，其余待补充。';
   $$('#segSrc .seg-item').forEach(t=> t.classList.toggle('on', t.dataset.r === srcRegion));
 }
 renderSrc();
@@ -1661,6 +1899,14 @@ $('#srcCta').onclick = ()=>{
 $$('#segOffer .seg-item').forEach(it=> it.onclick = ()=>{
   $$('#segOffer .seg-item').forEach(x=>x.classList.remove('on'));
   it.classList.add('on'); offerRegion = it.dataset.o; renderOffer();
+});
+$$('#offerTags .bf-pill').forEach(it=> it.onclick = ()=>{
+  $$('#offerTags .bf-pill').forEach(x=>x.classList.remove('on'));
+  it.classList.add('on'); offerTag = it.dataset.v; renderOffer();
+});
+$$('#offerTagsUk .bf-pill').forEach(it=> it.onclick = ()=>{
+  $$('#offerTagsUk .bf-pill').forEach(x=>x.classList.remove('on'));
+  it.classList.add('on'); offerTagUk = it.dataset.v; renderOffer();
 });
 
 /* ---------- 交互 ---------- */
@@ -1911,7 +2157,7 @@ $('#screen').addEventListener('scroll', ()=>{
   var y = $('#screen').scrollTop + 120;
   var groups = [
     ['secOffer','offer榜'],
-    ['secPath','三大路径'],['secLogic','申请逻辑'],['secTl','时间规划'],
+    ['secPath','三大路径'],['secLogic','核心竞争力'],['secTl','时间规划'],
     ['secCases','案例'],
     ['secAdv','课程提升'],['secTeam','服务体系'],
     ['secFaq','常见问题']
